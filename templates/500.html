@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<head >
+	<header class="main-header">
+		<div class="row">
+			<div class="logo">
+				<a href="#"></a>
+			</div>   		
+		</div>   
+	</header> 
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="{% static 'shop.gionee.com.error/css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'shop.gionee.com.error/css/main.css' %}">
+</head>
+<body >
+	<main id="main-404-content" class="main-content-static">
+		<div class="content-wrap">
+			<div class="shadow-overlay"></div>
+			<div class="main-content">
+				<div class="row" >
+					<div class="col-twelve" >
+						<h1 class="kern-this">500 Error.</h1>
+						<p >
+							Oooooops! Looks like nothing was found at this location.
+							Maybe try on of the links below, click on the top menu
+							or try a search?
+						</p>   			
+					</div> <!-- /row -->    		 		
+				</div> <!-- /main-content --> 
+			</div>
+			<footer>
+				<div class="row">
+					<div class="col-seven tab-full social-links pull-right">
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="/">About</a></li>			
+						</ul>
+					</div>
+				</div> 
+			</footer> <!-- /content-wrap -->
+		</main> <!-- /main-404-content -->
+		<style type="text/css">
+			#main-404-content.main-content-static {
+				background-image: url("{% static 'shop.gionee.com.error/images/slides/500.jpg' %}");
+				background-position: center;			
+				-moz-background-size: cover;
+				background-size: cover;	
+			}
+			header .logo a {
+				display: block;
+				width: 282px;
+				height: 72px;
+				background: url({% static 'shop.gionee.com.error/images/main-logo.png' %}) no-repeat center;
+				background-size: 282px 72px;
+			}
+		</style>
+	</body>
+	</html>

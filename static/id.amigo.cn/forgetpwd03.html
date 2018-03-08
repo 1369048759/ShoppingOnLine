@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="reset">
+<head>
+  <!-- /base(href="/members/reset/") -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link type="text/css" rel="stylesheet" href="css/common.css"/>
+  <link type="text/css" rel="stylesheet" href="css/resetroute.css"/>
+  <link type="text/css" rel="stylesheet" href="css/reset_phone.css" media="screen and (max-device-width: 768px)"/>
+</head>
+<body ng-controller="main">
+  <div id="outer">
+    <div id="middle">
+      <footer class="pa w">
+        <address class="tc" ng-bind="i18n.Gionee"></address>
+      </footer>
+      <div id="inner" class="holder bc pr">
+        <div class="top frag pa l0"></div>
+        <div class="bottom frag pa l"></div>
+        <header class="tc">
+          <h1 class="ib vm mt10">
+            <span class="none">amigo找回密码</span>
+          </h1>
+          <div class="title" ng-bind="i18n.reset_title"></div>
+          <p class="errorCode pa transition" ng-show="infor.errorCode">
+            <span ng-bind="infor.errorCode"></span>
+          </p>
+          <ul class="pt20 tc w transition" ng-class="{ib:infor.register}">
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit1}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow1}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit2}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow2}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit3}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow3}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit4}"></li>
+          </ul>
+        </header>
+        <section class="pr pageFrame" >
+          <form class="form passwordForm bc pa w t0 ng-pristine ng-scope ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength" onsubmit="return false" name="passwordForm" novalidate="novalidate">
+            <p class="mt30 tc">
+              <input type="password" autofocus="autofocus" class="password-input vm no_space add-selected transition-border ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength" id="password" name="password" placeholder="请输入8～16位数字与字母组合密码" ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/" ng-model="infor.password" ng-required="true" ng-minlength="8" ng-maxlength="16" required="required">
+            </p>
+            <p class="mt20 tc">
+              <input type="password" class="vm password-input no_space add-selected transition-border ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-touched" id="repassword" name="repassword" placeholder="请再次确认密码" ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/" ng-model="infor.repassword" ng-required="true" ng-minlength="8" ng-maxlength="16" required="required">
+            </p>
+            <p class="tc mt30">
+              <button class="submit-btn ib tc ng-binding" ng-click="actions.nextPage()">下一步</button>
+            </p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/resetroute.js" defer="defer"></script>
+</body>
+</html>

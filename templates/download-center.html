@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html >
+<html>
+{% load staticfiles %}
+<head>
+<title>金立下载中心</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+
+<script type="text/javascript"  src="{% static 'down.gionee.com.download_center/js/page.js' %}"></script>
+<link href="{% static 'down.gionee.com.download_center/css/gioneedown.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'down.gionee.com.download_center/css/tempdown.css' %}" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/" type="image/x-icon"/>
+
+<link rel="stylesheet" type="text/css" href="{% static 'down.gionee.com.download_center/css/home_v2.201411051612.css' %}"/>
+<script type="text/javascript" src="{% static 'down.gionee.com.download_center/js/jquery-1.7.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'down.gionee.com.download_center/js/old.base.10173548.js' %}" charset="utf-8"></script>
+</head>
+<body>
+<div class="ny_content">
+
+
+<div class="g_hd" id="glbHeader">
+  <div class="wrapper" id="Jslheaderbd">
+      <a href="/" target="_self" hidefocus="true" class="g_logo fl tin">金品质立天下</a>
+        <div class="w750 fr">
+        <div class="g_quickMenu fr" id="JquickMenu">
+            <span class="loginReg" id="JloginReg">
+{% if request.user.id %}
+<a href="{% url 'users:order_list' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">{{ request.user.nick_name }}</a>
+{% else %}
+<a href="{% url 'users:login' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">账号登录</a>
+{% endif %}
+<span class="line">|</span>
+<a href="{% url 'users:register' %}" target="_self" hidefocus="true" class="reg">注册</a><b></b>
+<span class="line">|</span>
+<a href="{% url 'users:logout' %}" target="_self" hidefocus="true" class="reg">退出</a><b></b>
+</span>
+<span class="cart" id="Jcart">
+<span class="cart_hd"><a href="{% url 'carts:add' %}" hidefocus="true">购物车<b></b></a><i class="whitespace"></i></span>
+<span class="cart_bd" id="JcartBd">
+<span class="cart_loading"></span>
+</span>
+</span>
+        </div>
+        <div class="g_search fr">
+          <form action="{% url 'download:center' %}" >
+            <input class="txt fl" name="kw" type="text" value="" id="JsearchTxt" style="color: rgb(153, 153, 153);">
+            <input type="submit" class="btn_so fr" value="">
+          </form>
+        </div>
+        <ul class="g_mainnav c">
+<li class="mNav_item home"><a href="/" target="_self" hidefocus="true" class="mNav_title">首页</a></li>
+<li class="mNav_item mobile" id="JmNavMobile">
+<a href="{% url 'mobiles:list' %}" target="_self" hidefocus="true" class="mNav_title">手机</a>
+</li>
+<li class="mNav_item peijian"><a href="{% url 'parts:list' %}" target="_self" hidefocus="true" class="mNav_title">配件</a><b></b></li>
+<li class="mNav_item service"><a href="{% url 'service:list' %}" target="_self" hidefocus="true" class="mNav_title">服务</a><b></b></li>
+<li class="mNav_item loaddown"><a href="{% url 'download:center' %}" target="_blank" hidefocus="true" class="mNav_title">下载</a><b></b></li>
+<li class="mNav_item elife"><a href="{% url 'service:hint' %}" target="_blank" hidefocus="true" class="mNav_title">社区</a><b></b></li>
+<li class="mNav_item elife"><a href="{% url 'service:hint' %}" rel="nofollow" target="_blank" hidefocus="true" class="mNav_title">amigoOS</a><b></b></li>
+</ul>
+        </div>      
+        
+    </div>
+</div>
+
+<div class="content_nr">
+   <form action="" method="post" name="formsource" onsubmit="sb()">
+   <div class="download_content">
+	   	 
+	     <a href="getpts.action" class="s_bcg"></a>
+	</div>
+	</form>
+    <div class="source_anchor">
+      	<ul>
+          	
+	            <li  style="margin-right:3px;" >
+	           		<a href="{% url 'service:hint' %}" class="m_link" >
+	           			<span style="width: inherit;height: 50px;display: block;"></span>
+	           			<span style="background-image: url('{% static 'down.gionee.com.download_center/images/down-index-001.png' %}');" class="m_link_logo"></span>
+	         			<span class="m_link_t">易用汇</span>
+	           		</a>
+	            </li>		            
+            
+	            <li  style="margin-right:3px;" >
+	           		<a href="{% url 'service:hint' %}" class="m_link" >
+	           			<span style="width: inherit;height: 50px;display: block;"></span>
+	           			<span style="background-image: url('{% static 'down.gionee.com.download_center/images/down-index-002.png' %}');" class="m_link_logo"></span>
+	         			<span class="m_link_t">游戏</span>
+	           		</a>
+	            </li>		            
+            
+	            <li  style="margin-right:3px;" >
+	           		<a href="{% url 'service:hint' %}" class="m_link" >
+	           			<span style="width: inherit;height: 50px;display: block;"></span>
+	           			<span style="background-image: url('{% static 'down.gionee.com.download_center/images/down-index-003.png' %}');" class="m_link_logo"></span>
+	         			<span class="m_link_t">amigo</span>
+	           		</a>
+	            </li>		            
+            
+	            <li  >
+	           		<a href="{% url 'service:hint' %}" class="m_link" >
+	           			<span style="width: inherit;height: 50px;display: block;"></span>
+	           			<span style="background-image: url('{% static 'down.gionee.com.download_center/images/down-index-004.png' %}');" class="m_link_logo"></span>
+	         			<span class="m_link_t">周边下载</span>
+	           		</a>
+	            </li>		            
+            
+        </ul>
+     </div>
+</div>
+ 
+<div class="g_ft">     
+<div class="g_ft_coprt">
+        <div class="wrapper">
+            <ul class="g_ft_coplink c">
+             <li class="link_item link_first">
+               <a href="#" target="_blank" hidefocus="true">网站地图</a>
+             </li>
+            <li class="link_item link_company" id="Jconpany"><b></b>
+                <div class="ui_borderCir" style="z-index:2">
+                    <div class="ui_borderCir_t">
+                        <div class="ui_borderCir_tl"></div>
+                        <div class="ui_borderCir_tm"></div>
+                        <div class="ui_borderCir_tr"></div>
+                    </div>
+                    <div class="ui_borderCir_c">
+                        <p>集团下属公司<span></span></p>
+                        <ul style="display:none">
+                            <li><a href="#" target="_blank">欧新通信</a></li>
+                            <li><a href="#" target="_blank">奥软网络</a></li>
+                        </ul>
+                    </div>
+                    <div class="ui_borderCir_b">
+                        <div class="ui_borderCir_bl"></div>
+                        <div class="ui_borderCir_bm"></div>
+                        <div class="ui_borderCir_br"></div>
+                    </div>
+                </div>
+            </li>
+            </ul>
+            <div class="c">
+                <div class="lang" id="Jlang" style="z-index:3">
+                <div class="ui_borderCir">
+                    <div class="ui_borderCir_t">
+                        <div class="ui_borderCir_tl"></div>
+                        <div class="ui_borderCir_tm"></div>
+                        <div class="ui_borderCir_tr"></div>
+                    </div>
+                    <div class="ui_borderCir_c">
+                        <ul>
+                            <li><a href="# target="_blank">Global/English</a></li>
+                            <li><a href="#" target="_self">中国/简体中文</a></li>
+                        </ul>
+                    </div>
+                    <div class="ui_borderCir_b">
+                        <div class="ui_borderCir_bl"></div>
+                        <div class="ui_borderCir_bm"></div>
+                        <div class="ui_borderCir_br"></div>
+                    </div>
+                </div>
+                <span class="icon"></span>
+            </div>
+                <p class="copyright" style="position: relative; z-index:1; line-height: 45px;">增值电信业务经营许可证：<a href="http://www.gionee.com/licence3.shtml" target="_blank">粤B2-20120350</a>
+                    <a href="#" target="_blank">粤ICP备05087105号</a>
+                    <a href="#" target="_blank">粤网文[2013]029-029号</a>
+                    <a href="#" target="_blank">粤文市审[2012]196号</a>
+                     <span style="white-space: nowrap;">
+                    <a href="#" target="_blank"><img src="{% static 'down.gionee.com.download_center/picture/a.png' %}" width="120" height="45" style="vertical-align: middle;"></a>
+                    <a href="#" target="_blank"><img src="{% static 'down.gionee.com.download_center/picture/b.png' %}" width="120" height="45" style="vertical-align: middle;">    </a>
+</span>
+                </p>
+                <p class="copyright" style="line-height: 23px;">Copyright © 2013 深圳市金立通信设备有限公司 版权所有 .</p>
+            </div>
+          </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

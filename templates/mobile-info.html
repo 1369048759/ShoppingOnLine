@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>金钢2D_金钢系列_商城手机_金立商城</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<link rel="shortcut icon" href="/" type="image/x-icon">
+<link rel="canonical" href="/" />
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.mobile_info/css/global.201310171118.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.mobile_info/css/global_v2.201411051554.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.mobile_info/css/vi_v2.201401131635.css' %}"/>
+<script type="text/javascript" src="{% static 'shop.gionee.com.mobile_info/js/jquery-1.7.min.201303280959.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.mobile_info/js/md5.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.mobile_info/js/base_v2.201312061352.js' %}"></script>
+</head>
+<body class="sl_mNav_mobile">
+<div class="g_hd" id="glbHeader" data-la="12">
+<div class="wrapper" id="Jslheaderbd">
+<a href="https://www.gionee.com/index.shtml" target="_self" hidefocus="true" class="g_logo fl tin">金品质立天下</a>
+<div class=" fr g_hd_main">
+<div class="g_quickMenu fr" id="JquickMenu">
+<span class="loginReg" id="JloginReg">
+{% if request.user.id %}
+<a href="{% url 'users:order_list' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">{{ request.user.nick_name }}</a>
+{% else %}
+<a href="{% url 'users:login' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">账号登录</a>
+{% endif %}
+<span class="line">|</span>
+<a href="{% url 'users:register' %}" target="_self" hidefocus="true" class="reg">注册</a><b></b>
+<span class="line">|</span>
+<a href="{% url 'users:logout' %}" target="_self" hidefocus="true" class="reg">退出</a><b></b>
+</span>
+<span class="cart" id="Jcart">
+<span class="cart_hd"><a href="{% url 'carts:add' %}" hidefocus="true">购物车<b></b></a><i class="whitespace"></i></span>
+<span class="cart_bd" id="JcartBd">
+<span class="cart_loading"></span>
+</span>
+</span>
+</div>
+<div class="g_search fr">
+<form action="/" method="get" target="_blank" id="search">
+<input class="txt fl" name="kw" type="text" value="" id="JsearchTxt" />
+<input type="submit" class="btn_so fr" value="" />
+</form>
+</div>
+<ul class="g_mainnav c">
+<li class="mNav_item home"><a href="/" target="_self" hidefocus="true" class="mNav_title">首页</a></li>
+<li class="mNav_item mobile" id="JmNavMobile">
+<a href="{% url 'mobiles:list' %}" target="_self" hidefocus="true" class="mNav_title">手机</a>
+</li>
+<li class="mNav_item peijian"><a href="{% url 'parts:list' %}" target="_self" hidefocus="true" class="mNav_title">配件</a><b></b></li>
+<li class="mNav_item service"><a href="{% url 'service:list' %}" target="_self" hidefocus="true" class="mNav_title">服务</a><b></b></li>
+<li class="mNav_item loaddown"><a href="{% url 'download:center' %}" target="_blank" hidefocus="true" class="mNav_title">下载</a><b></b></li>
+<li class="mNav_item elife"><a href="{% url 'service:hint' %}" target="_blank" hidefocus="true" class="mNav_title">社区</a><b></b></li>
+<li class="mNav_item elife"><a href="{% url 'service:hint' %}" rel="nofollow" target="_blank" hidefocus="true" class="mNav_title">amigoOS</a><b></b></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="sl_wrapper">
+<div class="wrapper">
+<div class="ui_crumb" style="display:none">
+<ul>
+<li><a href="/" target="_self" hidefocus="true">商城</a></li><li><a href="/goods/list" target="_self" hidefocus="true">手机</a></li><li>{{ mobile.name }}</li>
+</ul>
+</div>
+<div class="vi_mainShow c">
+<div class="vi_sumary">
+<h1 class="name" id="goodName">{{ mobile.name }}</h1><span id="JgoodsId" class="fn_hidden"></span>
+<p class="slogan">{{ mobile.desc }}</p>
+<div class="w3_goods_infos">
+<div class="price">
+<span class="ue_jstfy">现价</span><em class="z w3_mr">：</em><span class="price_sale"><em>&yen;</em><span id="JgoodsPrice" goods_price="1099">{{ mobile.price }}</span></span>
+<span class="w3_pis_before">指导价：</span><span class="w3_pis_before w3_thro_line">&yen; {{ mobile.original_price }}</span>
+</div>
+</div>
+<dl class="vi_attribute">
+<dt class="lbl"><span class="ue_jstfy">颜色</span><em class="z">：</em></dt>
+<dd class="cont">
+<span class="vi_color curr dis" good_price="" title="爵士金">
+<img src="{{ MEDIA_URL }}{{ mobile.image }}" width="35" height="35" alt="{{ mobile.name }}" />
+<b class="sel"></b>
+</span>
+
+<b class="sel"></b>
+</span>
+</dd>
+</dl>
+<dl class="vi_attribute">
+<dt class="lbl"><span class="ue_jstfy">版本</span><em class="z">：</em></dt>
+<dd class="cont">
+<span good_id="17957" good_price="" title="{{ typical.get_memory_space_display }}">{{ typical.get_memory_space_display }}</span>
+</dd>
+</dl>
+<dl class="vi_quantity">
+<dt class="lbl jstfy"><span class="ue_jstfy">购买数量</span><em class="z">：</em></dt>
+<dd class="cont">
+<div class="ui_quantity" id="">
+<div class="ui_quantity_redu ui_quantity_redu_dis" onclick="redu();" id="redu"></div>
+
+<form id="form" action="{% url 'carts:add' %}" method="post">
+<input type="text" class="ui_quantity_num" id="iptQuantityQum" name='quantity' value=1 />
+<input type="hidden" id="product_id" name="product_id" value="{{ mobile.id }}">
+<input type="hidden" id="category" name="category" value="1">
+{% csrf_token %}
+</form>
+
+<div class="ui_quantity_add" onclick="add();" id="add"></div>
+</div>
+</dd>
+</dl>
+
+</div>
+
+<script type="text/javascript" src="{% static 'shop.gionee.com.mobile_info/js/new.js' %}"></script>
+<div class="vi_imgs" id="JviImgs">
+<div class="vi_imgs_big">
+<img src="{% static 'shop.gionee.com.mobile_info/picture/blank.gif' %}"  width="350" height="350" alt="{{ mobile.name }}" />
+</div>
+<div class="vi_imgs_small">
+<div class="panel">
+{% for image_1 in mobile_image_1 %}
+<li data_src="{{ MEDIA_URL }}{{ image_1.image }}">
+    <img src="{{ MEDIA_URL }}{{ image_1.image }}" orial_src="{{ MEDIA_URL }}{{ image_1.image }}" width="50" height="50" alt="金钢2D" />
+</li>
+{% endfor %}
+</div>
+<div class="pre"></div>
+<div class="next"></div>
+</div>
+<div class="view_medias">
+<a href="#" class="fl only_photos" id="showOriginalImg"><span class="spirit0722 fl"></span><em class="fl">查看大图</em></a>
+</div>
+</div>
+<div class="buy_area c">
+<div class="op">
+{% if parts.status == 2 %}
+<a href="#" class="btn_addCart btn_addCart_quehuo">暂时缺货</a>
+{% else %}
+<a class="btn_addCart" id="addCart_btn" onclick="add_cart()">立即购买</a>
+{% endif %}
+<script type="text/javascript">
+//收藏分享
+function add_cart(){
+    $("#form").submit();
+}
+
+</script>
+</div>
+</div>
+</div>
+<div class="prop_layotut" id="originalImgCon" style="display:none">
+<div class="lay_title"><h4>查看大图</h4><a class="spirit0722 pop_shut" href="#" title="关闭">关闭</a></div>
+<div class="pcs_album">
+<img id="albumBigImg" width="500" height="500" src="../static/shop.gionee.com.mobile_info/picture/blank.gif" />
+<span class="spirit0722 big_to_left" id="btnBigImgLeft"></span>
+<span class="spirit0722 big_to_right" id="btnBigImgRight"></span>
+</div>
+<div class="pcs_album_list" id="albumListBar">
+<span class="pcs_prev" id="albumLeft"></span>
+<span class="pcs_next next_none" id="albumRight"></span>
+<div class="products_pcslist" id="albumListCon">
+<div class="products_pcslist_con" id="albumList">
+{% for image_1 in mobile_image_1 %}
+<a class="products_pcsitem" href="#">
+
+<img width="86" height="86" src="{{ MEDIA_URL }}{{ image_1.image }}" thumb_url="{{ MEDIA_URL }}{{ image_1.image }}" original_src="{{ MEDIA_URL }}{{ image_1.image }}" alt="金立金钢2D" />
+</a>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+<div class="prop_layotut" id="videoCon" style="display:none">
+<div class="lay_title"><h4>查看视频</h4><a class="spirit0722 pop_shut" href="#" title="关闭">关闭</a></div>
+<iframe marginheight="0px" marginwidth="0px" bsrc="" src="" frameborder="0" width="750px" height="422px"></iframe>
+</div>
+</div>
+</div>
+<div class="vi_tab" id="JviTab">
+<div class="wrbgf1">
+<div class="vi_tab_optionsFix">
+<div class="vi_tab_optionsCon" id="JviTabCon">
+<ul class="vi_tab_options c">
+<li class="curr"><span>功能特色</span></li>
+<li><span>参数规格</span></li>
+<li><span>包装清单</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="vi_tab_con">
+<div class="vi_tab_item vi_tab_info" style="display:block;">
+<p>
+{% for image_2 in mobile_image_2 %}
+<img alt="" width="1190" height="800" src="{{ MEDIA_URL }}{{ image_2.image }}" />
+{% endfor %}
+</div>
+<div class="vi_tab_item">
+<table width="100%" border-collapse="collapse" cellpadding="0" cellspacing="0" bgcolor="#dddddd" class="vi_tab_specification">
+<tbody><tr>
+<th colspan="2" class="title">基本信息</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[上市时间]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.time_to_market|date:'Y年m月' }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[操作系统]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_os_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[处理器]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_cpu_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">存储</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[内存]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_memory_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[存储空间]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_memory_space_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[存储拓展容量]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_memory_expansion_space_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">网络参数</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[网络频段]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_network_band_display}}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[SIM卡尺寸]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_SIM_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">外观</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[外形]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_appearance_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[外观尺寸]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_appearance_of_size_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[重量]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_weight_display }}</td>
+</tr>
+<tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[机身材质]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_fuselage_material_display }}</td>
+</tr>
+<th colspan="2" class="title">屏幕</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[屏幕尺寸]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_screen_size_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[分辨率]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_resolution_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[PPI]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_PPI_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[屏幕色彩]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_screen_color_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[屏幕类型]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_screen_type_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[屏幕材质]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_screen_material_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">拍照</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[后置摄像头]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_rear_facing_camera_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[前置摄像头]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_facing_camera_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[传感器]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_sensor_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[闪光灯]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_flashlight_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[对焦模式]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_focusing_mode_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">视频拍摄</th>
+</tr>
+<tr>
+<tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[视频拍摄]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_video_shooting_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">多媒体</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[音乐播放]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_music_play_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[视频播放]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_video_play_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[图片播放]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_image_play_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[收音机]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_radio_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[录音机]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_recorder_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[通话录音]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_recorder_call_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">电池</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[容量 ]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.battery_capacity }}mAh</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[类型]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_battery_type_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">连接性</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[蓝牙]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_bluetooth_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[接口]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_interface_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[耳机接口]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_headphone_jack_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[WiFi]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_wifi_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">定位功能</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[GPS导航]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_GPS_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">输入</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[键盘类型]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_keyboard_type_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[输入模式]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_input_mode_display }}</td>
+</tr>
+<tr>
+<th colspan="2" class="title">传感器</th>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[陀螺仪]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_gyroscope_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[光线感应器]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_light_sensor_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[重力感应]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_accelerometer_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[距离感应]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_distance_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[电子罗盘]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_electronic_compass_display }}</td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF" align="left" width="20%" class="lbl">[指南针]</td>
+<td bgcolor="#FFFFFF" align="left" width="80%">{{ typical.get_compass_display }}</td>
+</tr>
+</tbody></table>
+
+</div>
+<div class="vi_tab_item"><p>主机*1，充电器*1，数据线*1，保护膜（已贴好）*1，服务手册*1、保护壳*1</p></div>
+</div>
+</div>
+<div class="g_ft" style="background:#fff">
+<div class="g_ts">
+<ul class="wrapper">
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_dropgos"></i><em>7天<br>退货保障</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_change"></i><em>30天<br>换货承诺</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_freesheep"></i><em>99元起<br>全场免运费</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_svspoint"></i><em>579家<br>售后服务点</em></a></li>
+</ul>
+</div>
+<div class="g_ft_guide wrapper c">
+<dl>
+<dt>关于金立</dt>
+<dd><a href="#" hidefocus="true" target="_blank">企业荣誉</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">金立体验店</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">代理商专区</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">加入金立</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">联系我们</a></dd>
+</dl>
+<dl>
+<dt>新闻资讯</dt>
+<dd><a href="#" hidefocus="true" target="_blank">公司新闻</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">媒体报道</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">金立月刊</a></dd>
+</dl>
+<dl>
+<dt>购物指南</dt>
+<dd><a href="#" hidefocus="true" target="_blank">购物流程</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">支付方式</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">配送说明及费用</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">订单管理</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">购买常见问题</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">预置应用公示</a></dd>
+</dl>
+<dl>
+<dt>售后服务</dt>
+<dd><a href="#" hidefocus="true" target="_blank">售后政策</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">售后服务网点</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">上门维修</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">签收须知</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">物流查询</a></dd>
+</dl>
+<dl>
+<dt>关注我们</dt>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="sina">新浪微博<b></b></a></dd>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="tencent">腾讯微博<b></b></a></dd>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="qzone">QQ空间<b></b></a></dd>
+</dl>
+<div class="g_gn_wx fr">
+<i class="ico_gn_weixin"></i>
+<span>扫一扫关注微信</span>
+</div>
+</div>
+<div class="g_ft_coprt">
+<div class="wrapper">
+<ul class="g_ft_coplink c">
+<li class="link_item link_first">
+<a href="#" target="_blank" hidefocus="true">网站地图</a>
+</li>
+<li class="link_item link_company" id="Jconpany"><b></b>
+<div class="ui_borderCir" style="z-index:2">
+<div class="ui_borderCir_t">
+<div class="ui_borderCir_tl"></div>
+<div class="ui_borderCir_tm"></div>
+<div class="ui_borderCir_tr"></div>
+</div>
+<div class="ui_borderCir_c">
+<p>集团下属公司<span></span></p>
+<ul style="display:none">
+<li><a href="#" rel="nofollow" target="_blank">欧新通信</a></li>
+<li><a href="#" rel="nofollow" target="_blank">奥软网络</a></li>
+</ul>
+</div>
+<div class="ui_borderCir_b">
+<div class="ui_borderCir_bl"></div>
+<div class="ui_borderCir_bm"></div>
+<div class="ui_borderCir_br"></div>
+</div>
+</div>
+</li>
+</ul>
+<div class="c">
+<div class="lang" id="Jlang" style="z-index:3">
+<div class="ui_borderCir">
+<div class="ui_borderCir_t">
+<div class="ui_borderCir_tl"></div>
+<div class="ui_borderCir_tm"></div>
+<div class="ui_borderCir_tr"></div>
+</div>
+<div class="ui_borderCir_c">
+<ul>
+<li><a href="#" target="_blank">Global/English</a></li>
+<li><a href="#" target="_self">中国/简体中文</a></li>
+</ul>
+</div>
+<div class="ui_borderCir_b">
+<div class="ui_borderCir_bl"></div>
+<div class="ui_borderCir_bm"></div>
+<div class="ui_borderCir_br"></div>
+</div>
+</div>
+<span class="icon"></span>
+</div>
+<p class="copyright" style="position: relative; z-index:1; line-height: 45px;">增值电信业务经营许可证：<a href="#" target="_blank">粤B2-20120350</a>
+<a href="#" target="_blank">粤ICP备05087105号</a>
+<a href="#" target="_blank">粤网文[2015]2233-484号</a>
+<a href="E" target="_blank">粤文市审[2012]196号</a>
+<span style="white-space: nowrap;">
+<a id='___szfw_logo___' href="#" target='_blank' rel="nofollow"><img src='{% static 'shop.gionee.com.mobile_list/picture/sf.png' %}' border='0' style="opacity: 0.8;" /></a>
+
+<script id="ebsgovicon" src="{% static 'shop.gionee.com.mobile_list/js/govicons.js' %}" type="text/javascript" charset="utf-8"></script>
+<a href="#" rel="nofollow" target="_blank"><img src="{% static 'shop.gionee.com.mobile_list/picture/b.png' %}" width="120" height="45" style="vertical-align: middle;" /> </a>
+</span>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">(function($){var oDelay=new $DelayLoad();oDelay.init();})(jQuery);var oguanhuai=new $Hover({obj:"#Jguanhuai",selectorPanel:".bd",config:{cssHover:"service_guanhuai_hover"}});var ocompany=new $Hover({obj:"#Jconpany",selectorPanel:"ul",cssHover:"link_company_hover"});var olang=new $Hover({obj:"#Jlang",selectorPanel:$("#Jlang").find("ul li").eq(0),cssHover:"lang_hover"});jQuery(document).ready(function($){$(".ton1").hover(function() {$(".ton1 a").addClass("hove");},function(){$(".ton1 a").removeClass("hove");});});</script>
+<div class="ui_minWin_mask vi_notice_win" id="JnoticeWin">
+<div class="ui_minWin">
+<div class="ui_minWin_hd">
+<div class="ui_minWin_title">货到通知：</div>
+<div class="ui_minWin_close">关闭</div>
+</div>
+<div class="ui_minWin_bd">
+<div class="vi_notice">
+<table cellpadding="0" cellspacing="0" class="vi_notice_table">
+<tr>
+<td class="lblTd">商品名称：</td>
+<td>金钢2D <input type="hidden" name="notice_id" value="1309" /></td>
+</tr>
+<tr>
+<td class="lblTd">订购数量：</td>
+<td>
+<div class="ui_quantity">
+<div class="ui_quantity_redu"></div>
+<input type="text" class="ui_quantity_num" value="1" name="notice_num">
+<div class="ui_quantity_add"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="lblTd">订购描述：</td>
+<td><textarea name="notice_desc"></textarea></td>
+</tr>
+<tr>
+<td class="lblTd">联系人：</td>
+<td><input type="text" class="ui_ftxt" name="notice_linkman"/></td>
+</tr>
+<tr>
+<td class="lblTd">联系电话：</td>
+<td><input type="text" class="ui_ftxt" name="notice_tel" /></td>
+</tr>
+<tr>
+<td class="lblTd"><span class="ui_mustIcon">*</span>电子邮箱：</td>
+<td><input type="text" class="ui_ftxt" name="notice_email"/><span class="ui_fhint_err" style="display:none"><em>请输入正确的电子邮箱</em></span></td>
+</tr>
+<tr>
+<td class="lblTd">&nbsp;</td>
+<td>
+<a href="#" target="_self" class="btn_conf" notice_tag="submit">提交</a><a href="#" target="_self" class="btn_cannel" notice_tag="cannel">取消</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="ui_minWin_mask vi_noticeSucc_win" id="JnoticeWinSucc">
+<div class="ui_minWin">
+<div class="ui_minWin_hd">
+<div class="ui_minWin_title">货到通知：</div>
+<div class="ui_minWin_close">关闭</div>
+</div>
+<div class="ui_minWin_bd">
+<div class="vi_noticeSucc">
+<h5>提交成功</h5>
+<p>商品到货之后我们会联系您 窗口将在<em class="fn_hl">3</em>秒内关闭</p>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="'{% static 'shop.gionee.com.mobile_info/js/new.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.mobile_info/js/vi_imgs.201311141534.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.mobile_info/js/vi.201401082006.js' %}"></script>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0"></script>
+<script type="text/javascript" id="bdshell_js"></script>
+
+<script src="{% static 'shop.gionee.com.mobile_info/js/stat.js' %}" language="JavaScript"></script>
+<noscript><img src="../static/shop.gionee.com.mobile_info/picture/conv.gif" width="0px" style="display:none !important;"/></noscript>
+
+</div>
+</body>
+</html>

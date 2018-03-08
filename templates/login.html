@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/login.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/common.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/startroute.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/start_phone.css' %}" media="screen and (max-device-width: 768px)"/>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery-1.7.min.js' %}"></script>
+</head>
+<body ng-controller="main">
+  <div id="outer" >
+    <div id="middle">
+      <div id="inner" class="holder bc pr">
+        <div class="control pa">
+          <div class="content">
+
+            <header class="tc pt1 pr">
+              <h1 class="ib mt30">
+                <span class="none" ng-bind="i18n.amigo_login"></span>
+              </h1>
+
+              <p class="errorCode pa transition" id="jsCompanyTips"></p>
+                <p class="errorCode pa transition" id="jsCompanyTips"></p>
+
+
+              <p class="change w tr mt20 none transition ib" >
+                  <span class="vt fl ml40 ng-binding" ng-bind="i18n.login">登录</span>
+                  <a class="mr40 vt tr ib pr30 ng-binding" href="{% url 'users:register' %}" ng-bind="i18n.regist">注册</a>
+              </p>
+            </header>
+
+            <div class="fl form-box">
+                <div class="tab-form">
+                    <div id="email_register_form" >
+                        <div class="form-group marb20">
+                            <label>账&nbsp;号</label>
+                            <input type="text" id="username" name="username" placeholder="请输入电话或邮箱">
+                        </div>
+                        <div class="form-group marb20 blur">
+                            <label>密&nbsp;码</label>
+                            <input type="password" id="password" name="password" placeholder="请输入8-20位非中文字符">
+                        </div>
+                        <p class="ifRemenber tc mt10">
+                            <a href="{% url 'users:forget' %}" class="ib ng-binding" >忘记密码？</a>
+                        </p>
+                        <div class="error btns" id="jsEmailTips">
+                        </div>
+                        <div class="auto-box marb20">
+                        </div>
+                        <input class="btn btn-green" id="loginBtn" type="submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">
+
+                    </div>
+                </div>
+                <p class="form-p">已有账号？<a href="/user/login/">[立即登录]</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{#  <script type="text/javascript" src="{% static 'id.amigo.cn/js/qc_loader.js' %}" data-appid="100481708" charset="utf-8" data-redirecturi="https://id.gionee.com/members/qq_callback"></script>#}
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/common.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/startroute.js' %}" defer="defer"></script>
+<script type="text/javascript">
+//收藏分享
+function login(current_elem, username, password){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:login' %}",
+        data:{'username':username, 'password':password},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                if(data.msg){
+                    $('#jsCompanyTips').html(data.msg)
+                }else if(data.active) {
+                    $('#jsCompanyTips').html(data.active)
+                }
+            }else if(data.status == 'success'){
+
+                window.location.href = "{% url 'mobiles:list' %}"
+            }else if(data.username){
+                $('#jsCompanyTips').html(data.username)
+            }else if(data.password){
+                $('#jsCompanyTips').html(data.password)
+            }
+        },
+    });
+}
+
+$('#loginBtn').on('click', function(){
+    login($(this), $('#username').val(), $('#password').val());
+});
+
+</script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/unslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'id.amigo.cn/js/login.js' %}"></script>
+</body>
+</html>

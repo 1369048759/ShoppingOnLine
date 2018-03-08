@@ -1,0 +1,94 @@
+.dialog-open,
+.dialog-open body {
+    overflow: hidden;
+}
+
+.dialog-open body {
+    padding-right: 17px;
+}
+
+.dialog {
+    position: fixed;
+    color: #7c7c7c;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    display: none;
+    z-index: 9999;
+}
+
+.bg, .dialog .bg, .dialog1 .bg, .dialog2 .bg {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+    filter: Alpha(opacity=50);
+    display: none;
+}
+
+.dialogbox {
+    position: relative;
+    width: 400px;
+    min-height: 300px;
+    padding: 15px;
+    margin: 30px auto;
+    background: #fff;
+    overflow:hidden;
+    display: none;
+}
+
+.dialogbox h1 {
+    color: #333;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.dialogbox .close {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.dialogbox .cont {
+    width: 340px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.dialogbox .box {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border: 1px solid #ccc;
+    margin: 15px 0;
+    border-radius: 3px;
+    position: relative;
+}
+
+.dialogbox .box.disabled {
+    display: none;
+}
+
+.dialogbox .box.focus, .dialogbox .box.error, .dialogbox .valcode.error {
+    border-color: #6ec558;
+    box-shadow: 0 0 5px #6ec558;
+}
+
+.dialogbox .box.blur, .dialogbox .valcode.blur {
+    border-color: #ccc;
+}
+
+.dialogbox .box.errorput, .coninform .errorput input, .dialogbox .valcode.errorput input {
+    border-color: #f00;
+    box-shadow: 0 0 5px #aa0b0b;
+}

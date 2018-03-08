@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+{% load staticfiles %}
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/login.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/common.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/startroute.css' %}"/>
+
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/jquery.msgbox.css' %}"/>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.min.js' %}"></script>
+
+</head>
+<body ng-controller="main">
+  <div id="outer">
+    <div id="middle">
+      <div id="inner" class="holder bc pr">
+        <div class="control pa" >
+          <div class="content">
+
+            <header class="tc pt1 pr">
+              <h1 class="ib mt30">
+                <span class="none" ng-bind="i18n.amigo_login"></span>
+              </h1>
+              <p class="errorCode_register pa transition" id="jsCompanyTips">
+
+              </p>
+              <p class="change w tr mt20 none transition ib" >
+                  <span class="vt fl ml40 ng-binding" ng-bind="i18n.regist">注册</span>
+                  <a class="mr40 vt tr ib pr30 ng-binding" href="{% url 'users:login' %}" ng-bind="i18n.login">登入</a>
+              </p>
+            </header>
+
+            <div class="fl form-box">
+            <div class="tab-form">
+                <div id="email_register_form">
+                    <div class="form-group marb20 ">
+                        <label>邮&nbsp;箱</label>
+                        <input type="text" id="email" name="email" placeholder="请输入您的邮箱地址" value="">
+                    </div>
+                    <div class="form-group marb20 blur">
+                        <label>密&nbsp;码</label>
+                        <input type="password" id="password" name="password" placeholder="请输入8-20位非中文字符">
+                    </div>
+                    <div class="form-group marb8 captcha1 blur">
+                        <label>验证码</label>
+                        {{ register_form.captcha }}
+                    </div>
+                    <div class="error btns" id="jsEmailTips">
+                    </div>
+                    <div class="auto-box marb8">
+                    </div>
+                    <input class="btn btn-green" id="registerBtn" type="submit" value="注册并登录">
+                </div>
+            </div>
+            <p class="form-p">已有账号？<a href="{% url 'users:login' %}">[立即登录]</a></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+function register(current_elem, email, password, id_captcha_0, id_captcha_1){
+
+
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:register' %}",
+        data:{'email':email, 'password':password, 'captcha_0':id_captcha_0, 'captcha_1':id_captcha_1},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'success'){
+                $.msgbox({
+
+                    closeImg: '{% static 'id.amigo.cn/images/close.png' %}',
+                    height:250,
+                    width:300,
+                    content:'注册成功 请登入邮箱激活账号',
+                    type :'text'
+                });
+                setTimeout(function(){window.location.href = "{% url 'users:login' %}";},3000);
+            }else if(data.captcha){
+                $('#jsCompanyTips').html(data.captcha)
+            }else if(data.user){
+                $('#jsCompanyTips').html(data.user)
+            }else if(data.email){
+                $('#jsCompanyTips').html(data.email)
+            }else if(data.password){
+                $('#jsCompanyTips').html(data.password)
+            }else if(data.msg){
+                $('#jsCompanyTips').html(data.msg)
+            }
+        },
+    });
+}
+
+$('#registerBtn').on('click', function(){
+    register(
+        $(this), $('#email').val(), $('#password').val(),
+        $('#id_captcha_0').val(), $('#id_captcha_1').val()
+    );
+});
+
+</script>
+
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.dragndrop.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.msgbox.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/unslider.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/login.js' %}"></script>
+</body>
+</html>

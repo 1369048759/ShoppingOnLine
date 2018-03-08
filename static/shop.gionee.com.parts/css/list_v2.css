@@ -1,0 +1,210 @@
+﻿/* ============================================================
+@ .list_ :列表（配件）20131018 new filedwu modify
+=============================================================== */
+.list_content { padding:30px 0 15px;}
+
+.list_options { height:41px; overflow:visible;border-bottom:solid 2px #e9e9e9;line-height:41px; margin-bottom:30px; _overflow:hidden;}
+.list_options li { float:left; position:relative; padding:0 20px; height:41px; line-height:41px; overflow:hidden;  font-size:14px; cursor:default;}
+.list_options .first { font-size:24px; padding-left:0;}
+.list_options .curr { border-bottom:solid 2px #ef4222;}
+
+.list_con {margin-bottom:12px; overflow:hidden;}
+.list_list { width: 980px;position:relative;  *padding-bottom:28px;   zoom:1; }
+.list_pro { float:left; position:relative; overflow:hidden; text-align:center; display:inline;}
+.list_pro .ui_pimg { margin:0 auto 0;}
+.list_pro .ui_pname { height:36px; overflow:hidden; margin-bottom:4px;}
+.list_pro .goods_title { width: 200px; height: 30px; line-height: 30px; overflow: hidden; text-align: center; margin: 0 auto; display: inline-block;   
+    padding-right: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;   
+    word-wrap: normal;
+}
+
+
+.clr{zoom:1;}
+.clr:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.list_banner {padding-top: 10px; }
+	.partshder{ font-size: 24px; border-bottom: #e9e9e9 1px solid; font-weight: normal; height: 43px; line-height: 43px; clear: both; margin-top: 10px;} 
+
+	.parts_selc{line-height: 28px;border-bottom: #e9e9e9 1px solid; clear: both; padding:13px 0;font-size: 14px } 
+	.parts_selc dt{ width: 78px; float: left; } 
+	.parts_selc dd{float: left;}
+	.parts_selc dd span.more{text-align: right; font-size: 12px;cursor: pointer;} 
+	.parts_selc .checkboxs {float: left; width: 830px;}
+	.parts_selc .checkboxs a { margin-right: 20px; line-height:28px;position: relative; padding-left: 18px; cursor: pointer; display: inline-block; } 	
+	.parts_selc .checkboxs a .checkbox{ vertical-align: middle;float: left; }
+	.parts_selc .checkboxs a i.ckbx{  display: block; width: 14px; height: 14px; background: url(../images/newpartlst.png) no-repeat 0 -148px ;position: absolute; top: 7px;left: 0; overflow: hidden;}  
+	.parts_selc .checkboxs a.select i.ckbx{background: url(../images/newpartlst.png) no-repeat 0 -134px}
+	.checkboxs a.quee{ float: left; margin-right: 20px; display: inline-block;line-height:28px; padding-left: 0px;} 
+	.checkboxs a.quee span{ display: inline-block; background: none; padding: 0 5px 0 15px; color: #000; position: relative; height: 25px; line-height: 25px; }
+	.checkboxs a.quee i{ width: 10px; height: 12px; overflow: hidden; margin-right: 3px;display: inline-block; background: url(../images/newpartlst.png) no-repeat -10px 0; position: absolute; left:3px; top: 7px} 
+	.checkboxs a.quee i.order_up{ background-position: -10px -12px;} 
+	.checkboxs a.on i{ display: inline-block; background: url(../images/newpartlst.png) no-repeat 0 0;}	
+	.checkboxs a.on i.order_up{background-position: 0 -12px;} 
+	.checkboxs a.on span{display: inline-block; background: #ef4222; border-radius: 3px; padding: 0 10px 0 15px; color: #fff;} 
+
+    
+    .list_pro a.img img { width: 200px; height: 200px; margin-bottom:10px }
+	.list_list_new{ width: 980px;}
+	.list_pro a.img{display: block;}
+    .btn_im_buy{ display: none; background: url(../images/newpartlst.png) no-repeat -22px 0; width: 69px; height: 24px; line-height: 24px; margin: 0 auto; padding-left: 10px; text-align: left;}
+    .hov .btn_im_buy{display: block;}
+    .list_pro .promot_st { width: 200px; margin: 0 auto 3px;color: #ef4222; font-weight: normal; font-size: 12px; overflow: hidden; height: 18px; line-height: 18px; display: block;} 
+    .list_pro .ui_pprice { line-height:20px; height:20px; margin-bottom:5px; font-weight: normal; overflow: hidden;}
+    .list_pro .ui_pprice span.yj { color: #999999; text-decoration: line-through; font-size: 16px}
+    .list_page input { display:none}
+    .list_page .prev ,
+    .list_page .next{ display: inline-block;_display: inline;}
+    .ui_page { text-align: center;}
+    .ui_page a{border-radius: 3px;background-image: linear-gradient(top, rgb(255,255,255) 29%, rgb(245,245,245) 65%);
+background-image: -o-linear-gradient(top, rgb(255,255,255) 29%, rgb(245,245,245) 65%);
+background-image: -moz-linear-gradient(top, rgb(255,255,255) 29%, rgb(245,245,245) 65%);
+background-image: -webkit-linear-gradient(top, rgb(255,255,255) 29%, rgb(245,245,245) 65%);
+background-image: -ms-linear-gradient(top, rgb(255,255,255) 29%, rgb(245,245,245) 65%);
+background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0.29, rgb(255,255,255)),color-stop(0.65, rgb(245,245,245)));}
+    .ui_page  .ui_page_first,
+    .ui_page  .ui_page_last { display: none}
+.hotsp,.newsp {position: relative;}
+.hotsp i{ display: block; width: 43px;  height: 88px; background: url(../images/newpartlst.png) no-repeat 0 -29px; position: absolute; top: 50px;left: 0} 
+.newsp i{ display: block; width: 43px;  height: 88px; background: url(../images/newpartlst.png) no-repeat -43px -29px; position: absolute; top: 50px;left: 0}
+
+/* 无结果 */
+.list_noRes {height: 200px;padding-top: 150px;background: url(../images/all_noresult.png) no-repeat center 80px;font-size: 18px;color: #ef4222;text-align: center;}
+
+/* vhd_dialog */
+.ui_dialog { position:absolute; width: 600px; border: #dddddd 1px solid; background: #fff;} 
+.ui_dialog_title { width: 560px; padding: 0 5px; background: #e0f2fc; height: 30px; line-height: 30px;} 
+.ui_dialog_close { position:absolute; right:10px; top:10px; width: 12px; height: 12px; overflow:hidden; background:url(../images/close.png) no-repeat 0 0; cursor: pointer; line-height: 200px;}
+.vhd_dialogInfo { padding: 20px 20px; width: 560px; zoom: 1; background: #fff    }
+.vhd_dialogInfo:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+/**.ui_dialog_content,.ui_dialog{ zoom: 1; }
+.ui_dialog_content:after,.ui_dialog:hover{content:".";display:block;height:0;clear:both;visibility:hidden;}**/
+
+.vhd_name { font-size:18px; line-height:25px; font-weight:normal; margin-bottom:4px;font-weight:normal; font-family:"Microsoft Yahei", simsun;}
+.vhd_dialog_slogan { font-family: "Microsoft Yahei" ,simsun; color:#c52120; margin-bottom: 10px;}
+.vhd_price { color:#c52120; font-weight:bold;font-family:Arial, Helvetica, sans-serif; font-size:16px; padding-bottom: 10px; margin-bottom: 10px; border-bottom:#e9e9e9 1px dotted }
+
+.vhd_attr { margin-bottom: 8px;  font-family:"Microsoft Yahei", simsun;}
+.vhd_attr .lbl { margin-bottom: 6px;font-family: simsun; margin-top: 3px; }
+.vhd_attr .cont { white-space: normal;}
+.vhd_attr .cont span { background: none repeat scroll 0 0 #FFFFFF;
+	position: relative;
+    border: 1px solid #DDDDDD;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px 4px 0;
+    min-width: 60px;
+    overflow: hidden;
+    padding: 0 10px;
+    text-align: center;
+    vertical-align: middle;}
+
+    .vhd_attr .cont span.curr {
+    background: url("../images/vi_attribute.png") no-repeat scroll 100% 100% #FFFFFF;
+    border: 2px solid #EF4222 !important;
+    padding: 0;
+}
+.vhd_attr .cont .dis { border-color:#eee; color:#999; cursor:default;}
+.vhd_attr .cont .curr { background: url(../images/attr.png)  no-repeat right 24px; border-color:#ef4122 }
+
+.vhd_quan_con { font-family: "Microsoft Yahei" ,simsun;border-bottom:#e9e9e9 1px dotted; padding-bottom: 10px}
+.vhd_quan_con .lbl {margin-bottom: 6px;}
+.attrname,.attrcont_color{ float:left;height: 32px; line-height: 32px; margin-bottom: 10px}
+.attrcont_color .vi_color{
+height: 32px;
+width: 32px;
+min-width: 32px;
+vertical-align: middle;
+position: relative;
+	display: inline-block;
+
+padding: 1px;
+border: solid 1px #ddd;
+overflow: hidden;
+text-align: center;
+background: #fff;
+font-size: 12px;
+line-height: 20px;
+margin: 0 5px 4px 0;
+vertical-align: middle;
+cursor: pointer;
+_width: 60px;
+_overflow: visible;}
+.attrname{	}
+.user_select { color:#ef4222; }
+.attrcont_color .vi_color .sel{display: none;}
+.curr .sel{position:absolute;width:10px;height:10px; display: block;right:0;bottom:0;background:url(../images/vi_attribute.png) no-repeat 100% 100%}
+
+
+.vhd_quan { overflow:hidden; zoom:1; float: left; margin-top: 4px;}
+.vhd_quan .redu,
+.vhd_quan .add,
+.vhd_quan .txt,.vhd_quan .add_dis,.vhd_quan .redu_dis { float: left; width: 24px; height: 24px;line-height: 24px; overflow:hidden; background: url(../images/newpartlst.png)  no-repeat 0 -163px; margin-right: 5px;}
+.vhd_quan .redu,
+.vhd_quan .add { cursor:pointer;}
+.vhd_quan .redu { background-position: 0 -163px;}
+.vhd_quan .add { background-position: -80px -163px;}
+.vhd_quan .txt { width: 50px; border:none 0; background-position: -27px -163px; text-align: center;}
+.vhd_quan .redu_dis { width: 24px; height: 24px; background-position: -105px -163px;cursor:default;}
+.vhd_quan .add_dis { width: 24px; height: 24px; background-position: -185px -163px;cursor:default;}
+
+.vhd_op {  text-align: left; position:relative; padding-top: 20px; overflow:hidden; zoom:1;}
+.vhd_op p{ margin-bottom: 5px;	}
+.vhd_op .hint {  color:#999; padding-right: 0; font-family:"Microsoft Yahei", simsun;}
+.vhd_op .btn { display: block; float: left; width: 142px; height: 50px; overflow:hidden; background: url(../images/newpartlst.png)  no-repeat 0 -74px; line-height:200px;cursor:default; zoom: 1;}
+
+.vhd_op .btn_curr { background-position: 0 -24px; cursor: pointer;}
+.vhd_op .btn_curr:hover{background-position: -142px -24px;} 
+.oragin_price,.ui_price_m {color: #ccc; text-decoration: line-through; margin-left: 5px;}
+.vhd_attr .cont span.vi_color {
+    height: 32px;
+    min-width: 32px;
+    position: relative;
+    vertical-align: middle;
+    width: 32px; padding:0;
+}
+
+
+body,.tbg_gray{ background: #f1f1f1}
+    .list_banner{padding: 0;}
+    .partssltbar{ background: #fff; margin-top: 2px;}
+    .list_content {background: #fff; border-top: 3px solid #ddd;  margin-top: -1px; }
+    .partssltbar{margin-top: 20px;}
+    .parts_selc{ padding:13px 0 ; margin: 0 20px;}
+    .parts_selc .checkboxs{ width: 100%}
+    .list_con{ width: 100%; overflow: hidden;}
+    .list_list{ background:#fff; width: 108% }
+    .list_content{ padding: 0;}
+    .list_pro{ width: 297px; height: 440px;  border: none; border-right:solid #eee 1px; overflow: hidden; padding: 40px 0 0px; background: #fff ; border-bottom:solid #eee 1px; padding-bottom: 0; position: relative;}
+    .list_pro:hover{ }
+    .list_pro .mask{width: 100%; background: rgba(239,66,34,.9);  bottom: 0; height: 111px;cursor: pointer;}    
+    .list_pro .charator{ font-size: 14px; font-family: "Microsoft Yahei"; color: #fff; line-height: 48px; height: auto}
+    .list_pro .ui_pimg{display: block; width: 210px; height: 350px;}
+    .list_pro .ui_pname{font-size: 14px; color: #000; height:50px; line-height: 25px; overflow: hidden; font-weight: bold; margin-bottom: 0;  }
+    .list_pro .ui_pname .ui_pslogan { display: block; color: #999999; font-size: 14px; font-weight: normal;}
+    .ui_price{}
+    .list_pro .ui_pprice_m{ font-size: 14px;font-family: "Microsoft Yahei"; }
+    .list_pro a.img {position: relative; overflow: hidden; width: 230px; height: 300px; margin: 0 auto 30px;}
+    .list_pro a.img img{ width: 300px; height: 300px;  margin-left: -35px;}
+    .list_pro .goods_title{ height: 20px; line-height: 20px; font-size: 15px;}
+    .list_pro .promot_st{color: #999999;}
+    a.btn_im_buy{ width: 95px; height: 36px; padding-left: 25px; background: #ef4222; font-size: 14px; line-height: 36px; color: #fff; text-align: left; position: absolute; left: 
+        89px; bottom: -1px}
+        a.btn_im_buy:hover{ background: #f45336; color: #fff}
+        a.btn_im_ssdetai{display: none; width: 86px; height: 24px; margin: 0 auto; position: relative; font-size: 14px; line-height: 24px; color: #ef4222; text-align: center; }
+        a.btn_im_buy:hover { text-decoration: none}
+        i.i_con_arort{ display: block; width: 15px; height: 15px; overflow: hidden; background-position: -345px -444px; position: absolute; right: 22px; top: 12px }
+        i.i_con_arwt{display: block; width: 13px; height: 13px; background-position: -348px -426px; position: absolute; right: 0; top: 7px}
+        .hov i.btn_im_ssdetai,.list_pro:hover a.btn_im_ssdetai{display: block;}
+
+        .list_noRes {
+height: 200px;
+padding-top: 150px;
+background:#fff url(../images/all_noresult.png) no-repeat center 80px;
+font-size: 18px;
+color: #ef4222;
+text-align: center;
+}

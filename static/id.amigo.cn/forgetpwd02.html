@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="reset">
+<head>
+  <!-- /base(href="/members/reset/") -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link type="text/css" rel="stylesheet" href="css/common.css"/>
+  <link type="text/css" rel="stylesheet" href="css/resetroute.css"/>
+  <link type="text/css" rel="stylesheet" href="css/reset_phone.css" media="screen and (max-device-width: 768px)"/>
+</head>
+<body ng-controller="main">
+  <div id="outer">
+    <div id="middle">
+      <footer class="pa w">
+        <address class="tc" ng-bind="i18n.Gionee"></address>
+      </footer>
+      <div id="inner" class="holder bc pr">
+        <div class="top frag pa l0"></div>
+        <div class="bottom frag pa l"></div>
+        <header class="tc">
+          <h1 class="ib vm mt10">
+            <span class="none">amigo找回密码</span>
+          </h1>
+          <div class="title" ng-bind="i18n.reset_title"></div>
+          <p class="errorCode pa transition" ng-show="infor.errorCode">
+            <span ng-bind="infor.errorCode"></span>
+          </p>
+          <ul class="pt20 tc w transition" ng-class="{ib:infor.register}">
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit1}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow1}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit2}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow2}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit3}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow3}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit4}"></li>
+          </ul>
+        </header>
+        <section class="pr pageFrame" >
+          <form class="form smsForm bc pa w t0 ng-pristine ng-scope ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength" onsubmit="return false" name="smsForm" novalidate="novalidate">
+            <!--<p ng-show="infor.qId" class="pa mail_content qId t0"><a href="javascript:" ng-click="actions.questionPage()">未收到短信，可尝试保密问题重置密码</a></p>-->
+            <p class="tc mt30 mail_content ng-binding">
+              已向手机<b class="ml5 mr5 ng-binding">180********</b>发送短信，请输入短信验证码。
+            </p>
+            <p class="mt30 tc">
+              <input type="text" placeholder="请输入短信验证码" autofocus="autofocus" class="vm smsCode-input add-selected transition-border ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-touched" id="smsCode" name="smsCode" ng-model="infor.smsCode" ng-required="true" ng-minlength="6" ng-maxlength="6" autocomplete="off" ng-pattern="/^\d+$/" required="required" style="">
+              <button class="second-btn ib tc vm ml10 ng-binding" ng-disabled="infor.second" ng-click="actions.getSms()">
+                获取验证码<b ng-show="infor.second" class="ng-binding ng-hide" style="">(0)</b>
+              </button>
+            </p>
+            <p class="tc mt20">
+              <button class="submit-btn ib tc ng-binding" ng-click="actions.nextPage()">下一步</button>
+            </p>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/resetroute.js" defer="defer"></script>
+</body>
+</html>

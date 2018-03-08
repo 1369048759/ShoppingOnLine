@@ -1,0 +1,198 @@
+﻿/* =================================================================
+@ service_:服务与支持
+==================================================================== */
+.service { padding:0 20px;margin:0 auto;}
+.service_top{margin-top:45px;}
+.navCur a:link,
+.navCur a:visited{color:#ef4222;}
+.navCur a:hover, 
+.navCur a:active{color:#ef4222;}
+.service_title {position:relative; height:58px;line-height:58px; font-size:22px; font-weight:normal; border-bottom:solid 2px #eaeaea;}
+/* ---------------------------------------------------
+@ .service_que :常见问题
+------------------------------------------------------ */
+.service_title .service_que_search{position:absolute;right:0px;top:18px;background:url(../images/service_search.png) 0 0 no-repeat;height:26px;width:200px;overflow:hidden;}
+.service_title .service_que_search .input_type{float:left;background:none;border:none 0;width:133px;height:26px;line-height:26px;padding-left:7px;font-size:12px;color:#999;} 
+.service_title .service_que_search .search_button{float:right;background:none;border:none;cursor:pointer;width:58px;height:26px;}
+
+.service_que_nav {position:relative;height:53px;line-height:53px;border-bottom:2px solid #eaeaea;font-size:14px;}
+.service_que_nav .navlist{float:left;padding:0 20px;}
+.service_que_nav .navCur {border-bottom:2px solid #ef4222;color:#ef4222;}
+.service_que_article{padding:27px 20px;border-bottom:1px solid #eaeaea;list-style-type:decimal;list-style-position:inside;font:12px/1.5em "宋体",arial,simsun,sans-serif;line-height:24px;}
+.service_que_article .article_title{line-height:29px;font-size:16px;}
+.service_que_article .article_con{text-align:justify;font-size:12px; }
+/* ---------------------------------------------------
+@ .service_question_none :常见问题（无结果）
+------------------------------------------------------ */
+.service .search_empty{margin-top:50px;font-size:14px;color:#777;margin-bottom:400px;}  
+.service .search_empty .search_tip{line-height:28px;} 
+.service .search_empty span{color:#ef4222;margin:0 7px;}
+/* ---------------------------------------------------
+@ .service_feedback :建议留言（成功）
+------------------------------------------------------ */
+.service_bd{min-height:600px;_height:600px;position:relative;}
+.service_bd .smile{position:absolute;left:315px;top:200px;height:100px;width:345px;background:url(../images/feedback_success.gif) 144px 0 no-repeat;}
+.service_bd .smile_tip{font-size:18px;color:#ef4222;padding-top:70px;}
+/* ---------------------------------------------------
+@ .service_feedback :建议留言
+------------------------------------------------------ */
+.service_feedback{margin-bottom:30px;}
+.service .service_tip{margin:20px 0;font-size:14px;}
+.service .feedtable{border-collapse:collapse;border-spacing: 0;text-align:left;font-size:14px;}
+.service .feedtable td,
+.service .feedtable th{padding-bottom:22px;position:relative;}
+.service .feedtable th{width:78px;font-weight:normal;font-size:14px;text-align:right;}
+.service .feedtable th span{color:#ef4222;}
+.service .feedtable .text_top{vertical-align:top;padding-top:15px;}
+.service .feedtable .text{color:#999;padding-left:7px;width:300px;height:36px;line-height:36px;border:1px solid #eaeaea;background:none;font-size:14px;float:left;}
+.service .feedtable .textarea{width:600px;height:150px;border:1px solid #eaeaea;padding-left:7px;overflow:visible;float:left;}
+.service .feedtable .colorfont{color:#777;clear:both;}
+.service .feedtable .button{background:url(../images/feedback_btn.gif) 0 0 no-repeat;width:88px;height:36px;border:none;color:#fff;text-align:center;font-size:14px;cursor:pointer;margin-right:14px;overflow:hidden;}
+.service .feedtable .button_can{background-position:-88px 0;color:#333;}
+
+/* ---------------------------------------------------
+@ .service_feedback :建议留言-交互提示
+------------------------------------------------------ */
+.service .feedtable .namenotice{float:left;display:inline;margin-left:10px;margin-top:8px;}
+.service .feedtable .emailnotice{float:left;display:inline;margin-left:10px;margin-top:8px;}
+.service .feedtable .contentnotice{float:left;display:inline;margin-left:10px;margin-top:8px;}
+.service .feedtable .ptip{background:url(../images/feedback_tip.png) left 0 no-repeat;float:left;margin:0px 10px 0px 0px;height:24px;overflow:hidden;}
+.service .feedtable .spantip{background:url(../images/feedback_tip.png) right 0 no-repeat;float:left;margin-left:8px;padding:3px 8px 3px 0;height:18px;font-size:12px;color:#fff;}
+/* ---------------------------------------------------
+@ .service_police :售后政策
+------------------------------------------------------ */
+.service_police{padding:30px 0;line-height:23px;}
+/* ---------------------------------------------------
+@ .service_home :服务首页 
+------------------------------------------------------ */
+.service_homebd{margin-bottom:25px;overflow:hidden;}
+.service_home{padding:38px 0;}
+.service_home_li{display:inline;position:relative;padding:0 15px;float:left;width:161px;border-left:1px solid #eaeaea;text-align:center;color:#777;margin-left:-1px;overflow:hidden;}
+.service_home_li a{display:block;height:85px;width:162px;zoom:1;}
+.service_home_li b{position:absolute;top:0px;left:76px;width:40px;height:50px;background:url(../images/service_home.gif) 0 0 no-repeat;cursor: pointer;}
+.service_home_li p.cen{width:140px;margin-left:16px;}
+.service_home_li .bugname{padding-top:55px;color:#ef4222;display:block;font-size:14px;line-height:30px;}
+.service_home_li b.software{background-position:-66px 0;}
+.service_home_li b.goodsmenu{background-position:-132px 0;}
+.service_home_li b.mb_component{background-position:-198px 0;}
+.service_home_li b.police{background-position:-264px 0;}
+.service_home_li b.imei{background-position:-330px 0;}
+.service_oftenque{float:left;width:625px;padding:0 20px 12px;border-right:solid 1px #eaeaea;margin-top:18px;}
+.service_home_title {position:relative;padding-bottom:18px;font-size:20px; font-weight:normal; border-bottom:solid 1px #eaeaea;}
+.service_oftenque_con{height:45px;line-height:45px;border-bottom:dashed 1px #eaeaea;font-size:14px;}
+.service_oftenque p.service_oftenque_more{color:#ef4222;margin:15px 0 0;position:relative;font-weight:normal;font-size:14px; padding-bottom:3px;}
+.service_oftenque p.service_oftenque_more span{position:absolute;top:4px;height:11px;width:7px;background:url(../images/vi_bought_go.gif) 0 0 no-repeat;}
+.service_right{float:right;padding:0 20px;width:254px;margin-top:18px;}
+.service_right .advice{padding-top:13px;line-height:20px;} 
+.service_right p.more_advice{color:#ef4222;margin:7px 0;position:relative;font-weight:normal;font-size:12px;margin-bottom:36px;}
+.service_right p.more_advice span{position:absolute;top:5px;height:11px;width:7px;background:url(../images/vi_bought_go.gif) 0 0 no-repeat;}
+.service_right .contact_us{position:relative;margin-top:13px;background:url(../images/service_right.png) 0 0 no-repeat;width:45px;height:50px;}
+.service_right .online_service{position:relative;color:#777;text-align:center; overflow:hidden;zoom:1;}
+.service_right .cont_qq {position:relative;float:left;width:146px;color:#ccc;padding-top:78px;line-height:20px;}
+.service_right .saleB { cursor:pointer; margin-right:4px;}
+.service_right .saleA { cursor:pointer; margin-left:4px;}
+.service_right .cont_qq p { letter-spacing:-1px; color:#777;}
+.service_right .phone{position:relative;float:right;width:108px;color:#777;text-align:center;}
+.service_right span.onlineTu{display:block;padding-top:75px;line-height:24px;color:#ef4222;font-size:14px;} 
+.service_right  b{display:block;position:absolute;top:16px;left:50px;background:url(../images/service_right.gif) 0 0 no-repeat;width:45px;height:50px;cursor: pointer;}
+.service_right  b.phone_con{background-position:-53px 0;left:30px; cursor:default;}
+.service_right a.contact_us_a{display:block;height:100px;width:108px;}
+
+.service_bignav{margin-top:20px;width:975px;}
+.service_bignav a{display:block;float:left;width:310px;height:155px;margin-right:15px;}
+/* ---------------------------------------------------
+@ .service_manual :产品手册
+------------------------------------------------------ */
+.service  .service_manual{position:relative;float:left; height:58px;line-height:58px; font-size:22px; font-weight:normal;}
+.service .onload_link{float:right;position:relative;height:58px;line-height:58px;padding-right:10px;display:inline;}
+.service .onload_link span{position:absolute;top:24px;height:11px;width:7px;background:url(../images/vi_bought_go.gif) 0 0 no-repeat;}
+.service .service_manual_table{clear:both;border-collapse: collapse;border-spacing: 0;font-size:14px;text-align: left;border-top: 2px solid #eaeaea;}
+.service .service_manual_table .col1{width:565px;}
+.service .service_manual_table .col2{width:150px;}
+.service .service_manual_table .col3{width:150px;} 
+.service .service_manual_table .col4{width:55px;}
+.service .service_manual_table th{height:46px;font-weight:normal;padding-left:10px;background:#f5f5f5;border-bottom:1px solid #eaeaea;text-align:left;}
+.service .service_manual_table td{position:relative;height:53px;line-height:53px;padding-left:10px;border-bottom:1px solid #eaeaea;}
+.service .service_manual_table td p.shouce{padding-left:30px;}
+.service .service_manual_table td p.shouce b{position:absolute;height:22px;width:22px;background:url(../images/service_manual.gif) 0 0 no-repeat;top:16px;left:10px;}
+.service .service_manual_table td span{position:absolute;top:21px;height:11px;width:7px;background:url(../images/vi_bought_go.gif) 0 0 no-repeat;}
+.service .service_manual_table td.fcolor{color:#777;}
+/* ---------------------------------------------------
+@ .IMEI_search :IMEI查询
+------------------------------------------------------ */
+.service_bd .IMEI{position:absolute;left:270px;top:200px;height:100px;width:480px;background:url(../images/imei_search.gif) 180px 0 no-repeat;} 
+.service_bd .IMEI_tip{font-size:18px;padding-top:70px;color:#777;}
+.service_bd .IMEI_tip .dianhua{color:#ef4222;}
+/* ---------------------------------------------------
+@ .sellNet :销售网点
+------------------------------------------------------ */
+.service .sellNet{ height:68px;line-height:68px; font-size:14px; font-weight:normal; border-bottom:solid 1px #eaeaea;}
+.service .sellNet_company{float:left;width:460px;border-bottom:solid 1px #eaeaea;padding:15px 0;line-height:22px;} 
+.service .sellNet_company p.company{font-size:16px;line-height:22px;}
+.sellpages{padding:20px 0;}
+/* ---------------------------------------------------
+@ .serviceNet :售后服务网点
+------------------------------------------------------ */
+.serviceNet_bd{margin-bottom:20px;}
+.service .serviceNet{  font-size:14px; font-weight:normal;vertical-align:middle; }
+.service .serviceNet p{padding:23px 0;}
+.service .input{color:#999;height:26px;line-height:26px;border:1px solid #eaeaea;padding-left:2px;margin-right:7px; width:150px;  vertical-align: middle;}
+.service .serviceNet_ul{border-bottom:1px solid #eaeaea;height:533px;overflow:hidden;} 
+.service .serviceNet_li{float:left;display:inline;width:383px;border-bottom:1px solid #eaeaea;padding:8px 0;line-height:20px;height:72px;}
+.service .serviceNet_li a{display:block;width:383px;color:#333;}
+.service .serviceNet_li p{padding-left:16px;}
+.service .serviceNet_li p.company{font-size:16px;}
+.service .map{float:right;height:600px;overflow:hidden;width:536px;margin-left:-1px;}
+.service .serviceNet_page{position:absolute;top:536px;left:0;width:381px;height:23px;text-align:center;margin:0;vertical-align:middle;clear:both;}
+.service .serviceNet_page .ui_page_first,
+.service .serviceNet_page .ui_page_last { display:none;}
+.service .page_h{text-align:center;} 
+.service .leftside{position:relative;float:left;width:381px;height:600px;overflow:hidden;border:1px solid #eaeaea;}
+.service_bd .cry{position:absolute;left:315px;top:200px;height:100px;width:345px;background:url(../images/cry.png) 144px 0 no-repeat;}
+.service_bd .cry_tip{font-size:18px;color:#ef4222;padding-top:70px;}
+/* ---------------------------------------------------
+@ .contact_box :联系我们
+------------------------------------------------------ */
+.service .contact_box{margin-top:20px;}
+.service .contact_box .map_contact{float:left;width:528px;}
+.service .contact_box .map_contact .bigmap{position:relative;margin:8px 0px 15px 0px;clear:both;}
+.service .contact_box .map_contact .bigmap a{padding-left:18px;}
+.service .contact_box .map_contact .bigmap b{position:absolute;left:2px;top:3px;width:14px;height:14px;background:url(../images/bigmap.gif) 0 0 no-repeat;}
+.service .contact_box .contact_content{float:left;margin-top:145px;}
+.service .contact_box .contact_content h1{height:22px;line-height:22px;color:#ef4222;font-size:22px;font-weight: normal;padding-bottom:20px;}
+.service .contact_box .contact_content .contact_address{line-height:250%;font-size:14px;}
+
+/* ----------------------------------------------------
+@ .service_exta :常见问题右侧模块
+------------------------------------------------------- */
+.service_exta { float:right; width:190px; padding-right:10px; display:inline;padding-bottom:50px;}
+.service_exta dl { border-top:solid 1px #e9e9e9; padding:15px 0 18px; line-height:21px; }
+.service_exta .first { border:none; padding-top:0px;}
+.service_exta dt {font:normal bold 14px/25px "Microsoft YaHei"; color:#333;}
+.service_exta dd { font-family:simsun;}
+.service_exta a.access { color:#999;}
+.service_exta a.access:hover { color:#EF4222;}
+
+.service_exta .bought ul { padding-top:6px;}
+.service_exta .bought a {color:#EF4222;}
+/* ------- 金立关怀 -------------- */
+.service_guanhuai {margin: 45px 0 0; position: relative;}
+.service_guanhuai_about { position: absolute; top: 2px; left: 86px; padding-right: 10px; _top: 6px;}
+.service_guanhuai_about .icon { display: block; width: 16px; height: 16px; overflow: hidden; background: url(../images/service_guanhuai.png) no-repeat 0 0; cursor: pointer;}
+.service_guanhuai_about .bd { position: absolute; width: 266px; top: 15px; left: -90px; padding-top: 12px; display: none;}
+.service_guanhuai_about .cont { border: solid 1px #ddd; padding:18px 10px; background: #fff; outline: 21px;}
+.service_guanhuai_about .trig { position: absolute; top:5px; left: 90px; width:13px; height:8px; overflow:hidden;background:url(../images/service_guanhuai.png) no-repeat -20px 0;_background:url(../images/service_guanhuai_8.png) no-repeat -20px 0;}
+
+.service_guanhuai_cont { padding-top: 15px;}
+.service_guanhuai_weixin { float: left;width: 135px; text-align: center;}
+.service_guanhuai_weixin p { line-height: 33px;}
+.service_guanhuai_blog { float: right; width: 80px;padding-right: 12px;}
+.service_guanhuai_blog a { display: block; width: 80px; overflow: hidden; margin-bottom: 26px;}
+.service_guanhuai_blog .name { display: block;width: 58px; padding-left: 22px; height: 18px; overflow:hidden; margin-bottom: 9px;background:url(../images/service_guanhuai.png) no-repeat -82px 0; font-size: 14px; line-height: 18px;}
+.service_guanhuai_blog .icon { display: block;width: 45px; padding-left:35px;height: 22px; overflow: hidden;background:url(../images/service_guanhuai.png) no-repeat 0 -16px;line-height: 22px;color: #fff}
+.service_guanhuai_blog .tencent .name {background-position:-82px -40px }
+.service_guanhuai_blog .tencent .icon {background-position:0 -38px;height: 19px;line-height: 19px; width: 65px;padding-left: 25px; }
+
+
+.service_bignav{margin-top:20px;width:975px;}
+.service_bignav a{display:block;float:left;width:310px;height:155px;margin-right:15px;}

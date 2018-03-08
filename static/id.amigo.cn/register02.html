@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="reset">
+<head>
+  <!-- /base(href="/members/start/") -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <meta property="qc:admins" content="075256525146717655637575552523734124"/>
+  <link type="text/css" rel="stylesheet" href="css/common.css"/>
+  <link type="text/css" rel="stylesheet" href="css/startroute.css"/>
+  <link type="text/css" rel="stylesheet" href="css/start_phone.css" media="screen and (max-device-width: 768px)"/>
+</head>
+<body ng-controller="main">
+  <div id="outer" ng-class="{card:infor.card}">
+    <div id="middle">
+      <footer class="pa w">
+        <address class="tc" ng-bind="i18n.Gionee"></address>
+      </footer>
+      <div id="inner" class="holder bc pr">
+        <div class="control pa" ng-class="{selected:infor.codeRequired}">
+          <div class="top frag pa"></div>
+          <div class="bottom frag pa"></div>
+          <div class="content">
+            <header class="tc pt1 pr">
+              <h1 class="ib mt30">
+                <span class="none" ng-bind="i18n.amigo_login"></span>
+              </h1>
+              <p class="errorCode pa transition" ng-show="infor.errorCode">
+                <span ng-bind="infor.errorCode"></span>
+              </p>
+              <p class="change w tr mt20 none transition" ng-class="{ib:infor.bind}">
+                <span class="vt fl ml40" ng-bind="i18n.bind"></span>
+              </p>
+              <p class="change w tr mt20 none transition" ng-class="{ib:!infor.w3 &amp;&amp;!infor.bind &amp;&amp; !infor.register}">
+                <span class="vt fl ml40" ng-bind="i18n.login"></span>
+                <a class="mr40 vt tr ib pr30" href="javascript:" ng-click="actions.register()" ng-bind="i18n.regist"></a>
+              </p>
+              <p class="change w tr mt20 none transition" ng-class="{ib:!infor.bind &amp;&amp; infor.register}">
+                <span class="vt fl ml40" ng-bind="i18n.regist"></span>
+                <a class="mr40 vt tr ib pr30" href="javascript:" ng-click="actions.login()" ng-bind="i18n.login"></a>
+              </p>
+              <p class="change w tr mt20 none transition" ng-class="{ib:infor.w3 &amp;&amp; !infor.register}">
+                <span class="vt fl ml40 orange" ng-bind="i18n.login"></span>
+                <a class="grey mr40 vt tr ib pr30 small grey mt5" href="javascript:" ng-click="actions.origin_login()" ng-bind="i18n.origin_login"></a>
+              </p>
+              <ul class="mt5 tc w none transition" ng-class="{ib:infor.register}">
+                <li class="vm ib point transition" ng-class="{selected:infor.pageTit1}"></li>
+                <li class="vm ib line transition" ng-class="{selected:infor.pageArrow1}"></li>
+                <li class="vm ib point transition" ng-class="{selected:infor.pageTit2}"></li>
+                <li class="vm ib line transition" ng-class="{selected:infor.pageArrow2}"></li>
+                <li class="vm ib point transition" ng-class="{selected:infor.pageTit3}"></li>
+              </ul>
+            </header>
+            <section class="pr " >
+              <form class="form passwordForm bc pa w t0 ng-pristine ng-scope ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength" name="passwordForm" novalidate="novalidate" onsubmit="return false">
+                <p class="tc">
+                  <input type="password" class="password-input vm no_space add-selected transition-border ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-touched" autofocus="autofocus" id="password" name="password" placeholder="请输入8～16位数字与字母组合密码" ng-model="infor.password" ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/" ng-required="true" ng-minlength="8" ng-maxlength="16" required="required">
+                </p>
+                <p class="mt10 tc">
+                  <input type="password" class="vm password-input no_space add-selected transition-border ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength" id="repassword" name="repassword" placeholder="请再次确认密码" ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/" ng-model="infor.repassword" ng-required="true" ng-minlength="8" ng-maxlength="16" required="required">
+                </p>
+                <p class="mt10 tc">
+                  <input type="text" class="vm smsCode-input add-selected transition-border ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength" id="smsCode" name="smsCode" ng-model="infor.smsCode" ng-required="true" autocomplete="off" ng-minlength="6" ng-maxlength="6" ng-pattern="/^\d+$/" placeholder="请输入短信验证码" required="required">
+                  <button class="second-btn ib tc vm ml5 ng-binding" ng-disabled="infor.second" ng-click="actions.getSms()">
+                    获取验证码<b ng-show="infor.second" class="ng-binding ng-hide" style="">(0)</b>
+                  </button>
+                </p>
+                <p class="reminder mt5 pl30 pr30 ng-binding">
+                  已向手机<b class="ml5 mr5 ng-binding">180********</b>发送短信，请输入短信验证码。
+                </p>
+                <p class="tc mt20">
+                  <button class="submit-btn ib tc ng-binding" ng-click="actions.nextPage()">下一步</button>
+                </p>
+              </form>
+            </section>
+            <footer class="none">
+              <input id="session" type="hidden" name="session" ng-model="infor.session" value=""/>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/qc_loader.js" data-appid="100481708" charset="utf-8" data-redirecturi="https://id.gionee.com/members/qq_callback"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="js/startroute.js" defer="defer"></script>
+</body>
+</html>

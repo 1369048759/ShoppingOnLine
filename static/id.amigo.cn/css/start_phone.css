@@ -1,0 +1,6 @@
+﻿#outer { background: none; }
+.holder { background: none; height: auto; }
+.holder { width: 100%; max-width: 343px; background-size: contain; }
+.control { position: inherit; left: auto; top: auto; width: 100%; }
+.country { width: 30%; }
+.country-rear { width: 51%; }

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<link rel="stylesheet" type="text/css" href="{% static 'as.gionee.com.borkenscreen/css/base.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'as.gionee.com.borkenscreen/css/style.css' %}" />
+		<script type="text/javascript" src="{% static 'as.gionee.com.borkenscreen/js/common.js' %}"></script>
+		<title></title>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="container"><a href="/"> <img src="{% static 'as.gionee.com.borkenscreen/picture/logo.jpg' %}" /></a></div>
+		</div>
+		<div class="index">
+			<div class="part0">
+				<div class="container">
+					<a href="#"><img class="p0" src="{% static 'as.gionee.com.borkenscreen/picture/index3.png' %}" /></a>
+					<img class="p1" src="{% static 'as.gionee.com.borkenscreen/picture/index4.png' %}" />
+					<a href="#"><img class="p2" src="{% static 'as.gionee.com.borkenscreen/picture/index5.jpg' %}" /></a>
+					<img class="p3" src="{% static 'as.gionee.com.borkenscreen/picture/index6.png' %}" />
+				</div>
+			</div>
+			<div class="part1">
+				<div class="container">
+					<img src="{% static 'as.gionee.com.borkenscreen/picture/index0.jpg' %}">
+				</div>
+			</div>
+			<div class="part2">
+				<div class="container">
+					<img src="{% static 'as.gionee.com.borkenscreen/picture/index1.png' %}">
+				</div>
+			</div>
+			<div class="part3">
+				<div class="container">
+					<img src="{% static 'as.gionee.com.borkenscreen/picture/index2.jpg' %}">
+				</div>
+			</div>
+			<div class="part4">
+				<div class="container">
+					<h3>常见问题解答</h3>
+                    {% for question in broken_screen_questions %}
+					<p>{{ forloop.counter }}.{{ question.question }}？</p>
+					<p>答：{{ question.content }}</p>
+					<br/>
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

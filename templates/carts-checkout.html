@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>购物流程_金立商城</title>
+<meta http-equiv="pragma" content="no-cach" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/" type="image/x-icon" />
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.account/css/global.201310171118.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.account/css/global_v2.201411051554.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.account/css/cart_v2.css' %}"/>
+
+
+
+<script type="text/javascript" src="{% static 'shop.gionee.com.account/js/jquery.js' %}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'shop.gionee.com.account/css/jquery.msgbox.css' %}"/>
+
+<link href="{% static 'shop.gionee.com.account/css/common.css' %}" rel="stylesheet"/>
+<link href="{% static 'shop.gionee.com.account/css/select2.css' %}" rel="stylesheet"/>
+<script type="text/javascript" src="{% static 'shop.gionee.com.account/js/jquery.msgbox.min.js' %}"></script>
+
+
+
+
+
+
+<style>.tuij_tips{display:block;background:#ef4222;color:#fff;height:20px;position:absolute;width:78px;top:-18px;left:27px;font-size:12px;text-align:center;line-height:22px;}.zsyh{position:relative;}.orderSuc_payBox .item,.orderSuc_payBox ul{overflow:visible;}.orderSuc_payBox .item_curr .tuij_tips{top:-22px}</style>
+</head>
+<body>
+<div class="g_hd" id="glbHeader">
+<div class="wrapper" id="Jslheaderbd">
+<a href="/" target="_self" hidefocus="true" class="g_logo fl tin">金品质立天下</a>
+<div class="w750 fr">
+<div class="g_quickMenu fr" id="JquickMenu">
+<span class="loginReg" id="JloginReg">
+{% if request.user.id %}
+<a href="{% url 'users:order_list' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">{{ request.user.nick_name }}</a>
+{% else %}
+<a href="{% url 'users:login' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">账号登录</a>
+{% endif %}
+<span class="line">|</span>
+<a href="{% url 'users:register' %}" target="_self" hidefocus="true" class="reg">注册</a><b></b>
+<span class="line">|</span>
+<a href="{% url 'users:logout' %}" target="_self" hidefocus="true" class="reg">退出</a><b></b>
+</span>
+<span class="cart" id="Jcart">
+<span class="cart_hd"><a href="{% url 'carts:add' %}" hidefocus="true">购物车<b></b></a><i class="whitespace"></i></span>
+<span class="cart_bd" id="JcartBd">
+<span class="cart_loading"></span>
+</span>
+</span>
+</div>
+<div class="g_search fr">
+<form action="/" method="get" target="_blank" id="search">
+<input class="txt fl" name="kw" type="text" value="" id="JsearchTxt" />
+<input type="submit" class="btn_so fr" value="" />
+</form>
+</div>
+</div>
+</div>
+</div>
+
+<noscript><img src="{% static 'shop.gionee.com.account/picture/conv.gif' %}" width="0px" style="display:none !important;"/></noscript>
+
+<div class="sl_wrapper">
+<div class="sl_area">
+<div class="cart_process">
+<h1 class="title">确认订单信息<i class="icart"></i></h1>
+<div class="cart_steps cart_steps2">
+<ul>
+<li class="step1">查看购物车</li>
+<li class="step2">确认订单信息</li>
+<li class="step3">确认/支付订单</li>
+</ul>
+<div class="icon">&nbsp;</div>
+</div>
+</div>
+
+<div class="confCart_box fn_clear">
+<div class="confCart_box_lbl ">
+<h3>收货地址</h3></div>
+<div class="confCart_box_cont">
+
+<div class="confCart_addr" id="Jaddress_name">
+
+{% for user_address in user_addresses %}
+<div class="confCart_addr_item" id="addr_item_{{ user_address.id }}" style="display: block;">
+<div class="item_simple fn_clear" id="address_{{ user_address.id }}">
+
+<div class="info">
+<label>
+<input type="radio" name="address" value="{{ user_address.id }}" {% if forloop.counter == 1 %}checked="checked"{% endif %}>
+<span class="country" id="country_{{ user_address.id }}">{{ user_address.address }}</span>
+(<em class="name" id="name_{{ user_address.id }}">{{ user_address.consignee }}</em>收)
+<span class="mobile" id="mobile_{{ user_address.id }}">{{ user_address.mobile }}</span>
+</label>
+</div>          
+
+<div class="op" style="display:none;" id="op_{{ user_address.id }}">
+<a href="#nolink" class="edit" tag="edit" id='edit_{{ user_address.id }}'>编辑</a>|
+<a href="#nolink" class="delete" tag="del" id='remove_{{ user_address.id }}'>删除</a>
+</div>
+
+</div>   
+
+
+
+<div class="item_cont cancel" style="display:none;" id="item_cancel_{{ user_address.id }}">
+
+<table class="confCart_addr_table">
+<tbody>
+
+<tr>
+<td class="lblTd ">
+<span class="ui_mustIcon">*</span>收货人姓名:</td>
+<td>
+<input name="consignee" class="input" id="input_name_{{ user_address.id }}" type="text" value="">
+<span class="ui_fhint_err" id="consigness_form_error_{{ user_address.id }}"></span>
+</td>
+</tr>
+
+<tr>
+<td class="lblTd ">
+<span class="ui_mustIcon">*</span>手机号码：</td>
+<td>
+<input name="mobile" id="input_mobile_{{ user_address.id }}" class="input" type="text" value="">
+<span class="ui_fhint_err" id="mobile_from_error_{{ user_address.id }}"></span>
+</tr>
+
+<tr>
+<td class="lblTd">
+<span class="ui_mustIcon">*</span>详细地址：
+</td>
+<td>
+    <select id="province_{{ user_address.id }}" style="width:120px;"></select>
+    <select id="city_{{ user_address.id }}" style="width:120px; margin-left: 10px"></select>
+    <select id="town_{{ user_address.id }}" style="width:120px;margin-left: 10px"></select>
+    <span class="ui_fhint_err" id="address_form_error{{ user_address.id }}"></span>
+</td>
+</tr>
+<script type="text/javascript">
+var province_name = ""
+var dict_town = ""
+$(document).ready(function(){
+  $("#province_"+{{ user_address.id }}).click(function() {
+      $("#city_" + {{ user_address.id }}).empty();
+      province_name = $("#province_"+{{ user_address.id }}).val();
+
+      $.getJSON("{% static 'shop.gionee.com.account/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var result = "<option value='" + key + "'>" + key + "</option>";
+                      $("#city_" + {{ user_address.id }}).append(result);
+                  }
+              }
+          });
+      });
+  });
+
+  $("#city_"+{{ user_address.id }}).click(function() {
+      $("#town_" + {{ user_address.id }}).empty();
+      var city_name = $("#city_"+{{ user_address.id }}).val();
+      $.getJSON("{% static 'shop.gionee.com.account/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var dict_city_town = value
+                      for(var city in dict_city_town) {
+                          if(city == city_name){
+                              dict_town = dict_city_town[city_name]
+                          }
+                      }
+                  }
+              }
+          });
+          for(var i=0;i<dict_town.length;i++){
+              var result = "<option value='" + dict_town[i] + "'>" + dict_town[i] + "</option>";
+              $("#town_" + {{ user_address.id }}).append(result);
+          }
+      });
+  });
+});
+</script>
+
+
+<tr>
+<td class="lblTd">&nbsp;</td>
+<td>
+    <input name="detail" class="input address" type="text" id="input_address_{{ user_address.id }}" value="">
+    <span class="ui_fhint_err" id="address_detial_form_error{{ user_address.id }}"></span>
+</td>
+</tr>
+
+<tr>
+<td class="lblTd">&nbsp;</td>
+<td>
+<input class="btn_save" name="save" type="button" value="保存" id="save_{{ user_address.id }}">
+<input class="btn_con" name="quxiao" type="button" value="取消" id="cancel_{{ user_address.id }}">
+</td>
+</tr>
+</tbody>
+</table>
+</div>  
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#edit_" + {{ user_address.id }}).click(function(){
+
+      $("#item_cancel_" + {{ user_address.id }}).slideToggle();
+
+      $.getJSON("{% static 'shop.gionee.com.account/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              var result = "<option value='" + n + "'>" + n + "</option>";
+              $("#province_" + {{ user_address.id }}).append(result);
+          });
+
+      });
+
+  });
+
+  function save(current_elem, user_address_id, consignee, mobile, province, city, town, address){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:address' %}",
+        data:{
+            'user_address_id':user_address_id,
+            'consignee':consignee,
+            'mobile':mobile,
+            'province':province,
+            'city':city,
+            'town':town,
+            'address':address
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            $('#consigness_form_error_'+{{ user_address.id }}).html("");
+            $('#mobile_from_error_'+{{ user_address.id }}).html("");
+            $('#address_form_error'+{{ user_address.id }}).html("");
+            $('#address_detial_form_error'+{{ user_address.id }}).html("");
+            if(data.status == 'invalid'){
+                if(data.consignee){
+                    $('#consigness_form_error_'+{{ user_address.id }}).html("<em>" + data.consignee+ "</em>")
+                }else if(data.mobile) {
+                     $('#mobile_from_error_'+{{ user_address.id }}).html("<em>" + data.mobile + "</em>")
+                }else if(data.address){
+                    $('#address_form_error'+{{ user_address.id }}).html("<em>" + data.address + "</em>")
+                }else if(data.address_detial) {
+                    $('#address_detial_form_error'+{{ user_address.id }}).html("<em>" + data.address_detial + "</em>")
+                }
+            }else if(data.status == 'success'){
+
+                $("#country_" + {{ user_address.id }}).text(address);
+                $("#mobile_" + {{ user_address.id }}).text(mobile);
+                $("#name_" + {{ user_address.id }}).text(consignee);
+                $("#item_cancel_" + {{ user_address.id }}).slideToggle();
+            }
+        },
+    });
+  }
+
+  $("#save_" + {{ user_address.id }}).click(function(){
+      consignee = $("#input_name_" + {{ user_address.id }}).val();
+      mobile = $("#input_mobile_" + {{ user_address.id }}).val();
+      province = $("#province_" + {{ user_address.id }}).val();
+      city = $("#city_" + {{ user_address.id }}).val();
+      town = $("#town_" + {{ user_address.id }}).val();
+      address = $("#input_address_" + {{ user_address.id }}).val();
+
+      save($(this), {{ user_address.id }}, consignee, mobile, province, city, town, address);
+
+  });
+
+  $("#cancel_" + {{ user_address.id }}).click(function(){
+      $("#input_name_" + {{ user_address.id }}).val("");
+      $("#input_mobile_" + {{ user_address.id }}).val("");
+      $("#input_address_" + {{ user_address.id }}).val("");
+      $("#item_cancel_" + {{ user_address.id }}).slideToggle();
+  });
+  $("#address_" + {{ user_address.id }}).mouseover(function(){
+      $("#address_" + {{ user_address.id }}).attr("class", "item_simple fn_clear focu");
+      document.getElementById("op_" + {{ user_address.id }}).style.display="block";
+  });
+  $("#address_" + {{ user_address.id }}).mouseout(function(){
+      $("#address_" + {{ user_address.id }}).attr("class", "item_simple fn_clear");
+      document.getElementById("op_" + {{ user_address.id }}).style.display="none";
+  });
+  $("#remove_" + {{ user_address.id }}).click(function(){
+      $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:address' %}",
+        data:{
+            'user_address_id':{{ user_address.id }},
+            'remove':'remove'
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'fail'){
+                 window.location.href = "{% url 'carts:checkout' %}"
+            }else if(data.status == 'success'){
+                 window.location.href = "{% url 'carts:checkout' %}"
+            }
+        },
+    });
+  });
+});
+</script>
+{% endfor %}
+
+
+
+<div id="JnewAddr" class="confCart_addr_new">
+<div class="btn_new_con">
+<span class="btn_new" tag="new" id="btn_new">+新增收货地址</span>
+</div>
+<div class="cont_new cancel" id="cont_new" style="display: none;">
+    <table class="confCart_addr_table">
+        <tbody>
+        <tr>
+            <td class="lblTd ">
+                <span class="ui_mustIcon">*</span>收货人姓名:
+            </td>
+            <td>
+                <input name="consignee" class="input" type="text" value="" id="consignee" >
+                <span class="ui_fhint_err" id="consigness_form_error"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="lblTd ">
+                <span class="ui_mustIcon">*</span>手机号码：
+            </td>
+            <td>
+                <input name="mobile" class="input" type="text" value="" id="mobile" >
+                <span class="ui_fhint_err" id="mobile_from_error"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="lblTd">
+                <span class="ui_mustIcon">*</span>详细地址：
+            </td>
+
+            <td>
+                <select id="province" style="width:120px;"></select>
+                <select id="city" style="width:120px; margin-left: 10px"></select>
+                <select id="town" style="width:120px;margin-left: 10px"></select>
+                <span class="ui_fhint_err" id="address_form_error"></span>
+            </td>
+        </tr>
+        <tr>
+        <td class="lblTd">&nbsp;</td>
+            <td>
+                <input name="detail" class="input address" type="text" id="address" value="">
+                <span class="ui_fhint_err" id="address_detial_form_error"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="lblTd">&nbsp;</td>
+            <td>
+                <input class="btn_save" name="save" type="button" value="保存" id="new_save">
+                <input class="btn_con" name="quxiao" type="button" value="取消" id="new_cancel">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    function save(current_elem, consignee, mobile, province, city, town, address){
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:address' %}",
+        data:{
+            'consignee':consignee,
+            'mobile':mobile,
+            'province':province,
+            'city':city,
+            'town':town,
+            'address':address
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            $('#consigness_form_error').html("");
+            $('#mobile_from_error').html("");
+            $('#address_form_error').html("");
+            $('#address_detial_form_error').html("");
+            if(data.status == 'invalid'){
+                if(data.consignee){
+                    $('#consigness_form_error').html("<em>" + data.consignee+ "</em>")
+                }else if(data.mobile) {
+                     $('#mobile_from_error').html("<em>" + data.mobile + "</em>")
+                }else if(data.address){
+                    $('#address_form_error').html("<em>" + data.address + "</em>")
+                }else if(data.address_detial) {
+                    $('#address_detial_form_error').html("<em>" + data.address_detial + "</em>")
+                }
+            }else if(data.status == 'success'){
+
+                window.location.href = "{% url 'carts:checkout' %}";
+            }
+        },
+    });
+  }
+
+  $("#new_save").click(function(){
+      consignee = $("#consignee").val();
+      mobile = $("#mobile").val();
+      province = $("#province").val();
+      city = $("#city").val();
+      town = $("#town").val();
+      address = $("#address").val();
+
+      save($(this), consignee, mobile, province, city, town, address);
+
+  });
+
+  $("#btn_new").click(function(){
+     $("#cont_new").slideToggle();
+     $.getJSON("{% static 'shop.gionee.com.account/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              var result = "<option value='" + n + "'>" + n + "</option>";
+              $("#province").append(result);
+          });
+
+      });
+
+  });
+
+  $("#province").click(function() {
+      $("#city").empty();
+      province_name = $("#province").val();
+
+      $.getJSON("{% static 'shop.gionee.com.account/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var result = "<option value='" + key + "'>" + key + "</option>";
+                      $("#city" ).append(result);
+                  }
+              }
+          });
+      });
+  });
+
+  $("#city").click(function() {
+      $("#town").empty();
+      var city_name = $("#city").val();
+      $.getJSON("{% static 'shop.gionee.com.account/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var dict_city_town = value
+                      for(var city in dict_city_town) {
+                          if(city == city_name){
+                              dict_town = dict_city_town[city_name]
+                          }
+                      }
+                  }
+              }
+          });
+          for(var i=0;i<dict_town.length;i++){
+              var result = "<option value='" + dict_town[i] + "'>" + dict_town[i] + "</option>";
+              $("#town").append(result);
+          }
+      });
+  });
+
+  $("#new_cancel").click(function(){
+    $("#cont_new").slideToggle();
+    $("#consignee").val("");
+    $("#mobile").val("");
+    $("#address").val("");
+    $("#province").empty();
+    $("#city").empty();
+    $("#town").empty();
+
+  });
+  
+});
+</script>
+
+
+</div>
+</div>
+<div class="confCart_box fn_clear">
+<div class="confCart_box_lbl ">
+<h3>支付方式</h3></div>
+<div class="confCart_box_cont">
+<div class="confCart_pay">
+<ul>
+<li class="item" tag_form="payment" id="item_one">
+<label>
+<input type="radio" name="payment" pay_code="alipay" value="1" checked="checked"/>在线支付</label>
+<span class="defhint"></span>
+<span class="hint_free"></span>
+</li>
+<li class="item " tag_form="payment" id="item_two">
+<label>
+<input type="radio" name="payment" pay_code="cod" value="2" />货到付款</label>
+<span class="defhint">顺丰配送范围内全国货到付款
+<a href="{% url 'service:detail' 5 4 %}" class="fn_hl" target="_blank">查看运费及配送范围</a></span>
+<span class="hint_free"></span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="confCart_box fn_clear">
+<div class="confCart_box_lbl ">
+<h3>配送方式</h3></div>
+<div class="confCart_box_cont">
+<div class="confCart_deliver">
+<ul>
+<li class="item " tag_form="shipping" id="item_three">
+<label>
+<input type="radio" name="shipping" support_cod="1" value="17" checked="checked"/>顺丰速运</label>
+<div>购物低于99元全国统一运费10元，99元包邮<span class="defhint">0.00元</span></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="confCart_box fn_clear">
+<div class="confCart_box_lbl" id="confCart_box_lbl">
+<h3 class="confCart_box_ibltitle" id="confCart_box_ibltitle">电子发票（非纸质）</h3>
+<div class="confCart_box_ibldetail" id="confCart_box_ibldetail" style="display: none;">
+<p class="confCart_box_iblcontent" >电子发票法律效力、基本用途及使用规定同纸质发票，不随商品寄出，可在订单详情中查询和下载。</p>
+<p>如需纸质发票请联系在线客服<a href="{% url 'service:detail' 5 6 %}" target="_blank">了解详情></a></p>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#confCart_box_lbl").click(function(){
+        $("#confCart_box_ibldetail").slideToggle();
+    });
+});
+
+$("#item_one").mouseover(function(){
+      $("#item_one").attr("class", "item focu");
+});
+
+  $("#item_one").mouseout(function(){
+      $("#item_one").attr("class", "item");
+});
+
+$("#item_two").mouseover(function(){
+      $("#item_two").attr("class", "item focu");
+});
+
+  $("#item_two").mouseout(function(){
+      $("#item_two").attr("class", "item");
+});
+
+  $("#item_three").mouseover(function(){
+      $("#item_three").attr("class", "item focu");
+});
+
+  $("#item_three").mouseout(function(){
+      $("#item_three").attr("class", "item");
+});
+
+</script>
+
+</div>
+<div class="op"><span class="confCart_bond_modify" id="confCart_bond_modify" style="display: none;">修改</span></div>
+<div class="confCart_box_cont">
+
+<div class="confCart_bond" id="JconfCartBond">
+<div class="confCart_bond_write" id="confCart_bond_write" style="display: block;">
+<div class="bd">
+<div class="item">
+<table>
+<tr>
+<td class="lblTd"><span class="ui_mustIcon">*</span>发票抬头：
+</td>
+<td>
+<select id="ui_personcompany">
+<option value="个人">个人</option>
+<option value="单位">单位</option>
+</select>
+    <input type="text" class="txt" name="inv_payee" id="inv_payee" />
+    <span class="ui_fhint_err" id="inv_payee_form_error"></span>
+</td>
+</tr>
+<tr>
+<td class="lblTd">发票内容：</td>
+<td>商品明细
+<input type="hidden" name="inv_content" value="金立S10C " />
+</td>
+</tr>
+<tr>
+<td class="lblTd"><span class="ui_mustIcon">*</span>收票人手机:</td>
+<td>
+    <input maxlength="11" type="text" class="txt" name="inv_phone" id="inv_phone" />
+    <span class="ui_fhint_err" id="inv_phone_form_error"></span>
+</td>
+</tr>
+
+<tr id="ui_inv_taxno" style="display: none">
+<td class="lblTd" style="vertical-align: text-bottom;"><span class="ui_mustIcon">*</span>纳税人识别号:</td>
+<td>
+<input placeholder="或填写统一社会信用代码" type="text" class="txt" name="inv_taxno" id="inv_taxno" value="">
+
+<span>* 2017年7月1日起，消费者申请开具企业抬头增值税普通发票，需提供纳税人识别号或统一社会信用代码。</span>
+<span class="ui_fhint_err" id="inv_taxno_form_error"></span>
+</td>
+</tr>
+
+
+<tr>
+<td class="lblTd">收票人邮箱:</td>
+<td>
+<input type="text" class="txt" name="inv_email" id="inv_email" />
+    <span class="ui_fhint_err" id="inv_email_form_error"></span>
+</td>
+</tr>
+<input type="hidden" id="hidden" value="0">
+</table>
+</div>
+<p class="fp_p145"><button class="btn_confirm" id="btn_confirm">确认发票信息</button></p>
+</div>
+</div>
+<div class="confCart_bond_result fn_hidden" id="JbondResult" style="display: none;">
+
+
+</div>
+<script>
+$(document).ready(function(){
+    $("#ui_personcompany").click(function(){
+        if($("#ui_personcompany").val() == "单位"){
+
+            $("#ui_inv_taxno").attr("style", "");
+        }else{
+            $("#ui_inv_taxno").attr("style", "display:none");
+            $("#inv_taxno").val("");
+        }
+    });
+
+    $("#confCart_bond_modify").click(function(){
+        $('#hidden').val(0)
+        document.getElementById("JbondResult").style.display="none";
+        document.getElementById("confCart_bond_write").style.display="block";
+        document.getElementById("confCart_bond_modify").style.display="none";
+    });
+
+    $("#btn_confirm").click(function () {
+
+        personcompany = $("#ui_personcompany").val();
+        inv_payee = $("#inv_payee").val();
+        inv_phone = $("#inv_phone").val();
+        inv_taxno = $("#inv_taxno").val();
+        inv_email = $("#inv_email").val();
+
+        $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'carts:invoice' %}",
+        data:{
+            'personcompany':personcompany,
+
+            'inv_payee':inv_payee,
+            'inv_phone':inv_phone,
+            'inv_taxno':inv_taxno,
+            'inv_email':inv_email
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            $('#hidden').val(1);
+            $('#inv_payee_form_error').html("");
+            $('#inv_phone_form_error').html("");
+            $('#inv_taxno_form_error').html("");
+            $('#inv_email_form_error').html("");
+            if(data.status == 'invalid'){
+                 if(data.inv_payee){
+                     $("#inv_payee_form_error").html("<em>"+data.inv_payee+"</em>");
+                 }else if(data.inv_phone){
+                     $("#inv_phone_form_error").html("<em>"+data.inv_phone+"</em>");
+                 }else if(data.inv_taxno) {
+                    $("#inv_taxno_form_error").html("<em>" + data.inv_taxno + "</em>");
+                 }else if(data.inv_email){
+                     $("#inv_email_form_error").html("<em>"+data.inv_email+"</em>");
+                 }
+            }else if(data.status == 'success'){
+                $("#taitou_result").text(inv_payee);
+                $("#inv_phone_result").html(inv_phone);
+                $("#inv_email_result").html(inv_email);
+                $("#inv_taxno_result").html(inv_taxno);
+                document.getElementById("JbondResult").style.display="block";
+                document.getElementById("confCart_bond_write").style.display="none";
+                document.getElementById("confCart_bond_modify").style.display="block";
+            }
+        },
+    });
+    });
+});
+</script>
+</div>
+</div>
+</div>
+
+
+<div class="cflist">
+<div class="bg fn_clear">
+<div class="leftbg">
+<h3 class="h3">商品清单</h3>
+<div class="pay_type fsize"><a href="{% url 'carts:add' %}">返回购物车</a></div>
+</div>
+<div class="rightdiv">
+<table class="cf_goodslist">
+<tbody>
+<tr>
+<th>商品</th>
+<th>&nbsp;</th>
+<th>单价</th>
+<th>数量</th>
+<th class="cf_price">小计</th>
+</tr>
+
+{% for name, product in products.items %}
+<tr>
+<td class="image">
+<a href="{% if product.category == 1 %}{% url 'mobiles:info' product.product_id %}{% else %}{% url 'parts:info' product.product_id %}{% endif %}" target="_blank"><img src="{{ MEDIA_URL }}{{ product.image }}" width="100" height="100"></a>
+</td>
+<td class="name">
+<p class="ui_pname">
+<a href="{% if product.category == 1 %}{% url 'mobiles:info' product.product_id %}{% else %}{% url 'parts:info' product.product_id %}{% endif %}" target="_blank">{{ name }}</a>
+</p>
+</td>
+<td class="ui_price"> ¥{{ product.price }}.00 </td>
+<td class="quantity"> {{ product.quantity }}</td>
+<td class="cf_price"> ¥{{ product.total_price }}.00 </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+<div class="cflist" style="margin-bottom:0">
+<div class="bg fn_clear">
+<div class="leftbg">
+<h3 class="h3">订单结算</h3></div>
+<div class="rightdiv">
+<table class="cf_gs_balance ">
+<tbody>
+<tr>
+<td>商品合计</td>
+<td class="textr"><span class="ui_price" id="JtotalProPrice">&yen;{{ price }}</span></td>
+</tr>
+<tr>
+<td>运费合计</td>
+<td class="textr ui_price">&yen;<span id="JtotalFee">10</span>(已减¥<span id="JtotalFee0">0</span>)</td>
+</tr>
+</tbody>
+</table>
+<div class="cartConf_bonus" style="margin-bottom:0; overflow:hidden" id="Jbonus">
+<div class="bonus_hd" id="bonus_hd"><span class="ico_arrodown qanuser2" tag_bonus="bonusSwif" id="JbonusSwif">使用现金券<i class="mincons folder"></i></span><a class="qanuser2" href="javascript:;" target="_self" id="JbonusCannel" tag_bonus="bonusCannel" style="display: none">取消使用</a><span class="r ui_price">-&yen;<em id="JtotalBonus">0</em></span></div>
+
+<div class="cartConf_bonus_bd" id="JbonusBd" style="display: none;">
+<div class="cartConf_bonusSel">
+<ul class="uesr_quan_lis">
+<li class="item" tag_bonus="bonus2">
+<label>
+<input name="bonus" type="radio"><span>激活现金券:</span></label>
+<input class="codequaninpt" name="discuntcodes" type="text" value="" id="JvoucherSn">
+
+<input type="button" class="submit" value="使用" tag_bonus="use" id="JvoucherUse" >
+
+<div class="erro_tips" id="Jvoucherhint" style="display: none;"><span class="lozs posl5p">◆</span>您输入的现金券号格式不正确，请检查后重新输入</div>
+<span class="codequaninpt" id="JvoucherResult" style="display: none;"></span><a href="javascript:;" target="_self" tag_bonus="modify" style="display: none;" id="JvoucherModi">修改</a><span class="qanright" style="display: none;" id="JvoucherDis"><i class="mincons"></i>可抵扣<em></em>元</span>
+</li>
+</ul>
+<input type="hidden" name="voucher" value=" " id="JtxtVoucher">
+<input type="hidden" name="voucher_sn" value=" " id="JtxtVoucherSn">
+</div>
+</div>
+
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#bonus_hd").click(function(){
+
+        $("#JbonusBd").slideToggle();
+    });
+});
+</script>
+
+
+</div>
+</div>
+</div>
+<div class="totleprice bgcolo">
+<div class="cf_ends bgcolo">
+<div class="ui_totle_price">总计：<em class="ui_price">&yen;<span id="JtotalPrice">{{ result_price }}</span></em></div>
+<div class="cforder_btn fn_clear bgcolo">
+<div class="y">
+<input type="submit" id="Jsumbit" class="confCart_submit" value="提交订单" />
+</div>
+</div>
+</div>
+</div>
+<input type="hidden" name="" value="1" id="Jtoken" />
+</form>
+</div>
+</div>
+<script type="text/javascript" src="{% static 'shop.gionee.com.account/js/address.js' %}"></script>
+<script src="{% static 'shop.gionee.com.account/js/stat.js' %}" language="JavaScript"></script>
+<noscript><img src="../static/shop.gionee.com.account/picture/conv.gif" width="0px" style="display:none !important;"/></noscript>
+<script>
+$("#Jsumbit").click(function () {
+
+        if($('#hidden').val() == 0){
+            $.msgbox({
+
+                    closeImg: '{% static 'shop.gionee.com.account/images/close.png' %}',
+                    height:250,
+                    width:300,
+                    content:'请确认发票信息',
+                    type :'text'
+                });
+        }else{
+            address = $("input[name='address']:checked").val();
+            payment = $("input[name='payment']:checked").val();
+            personcompany = $("#ui_personcompany").val();
+            inv_payee = $("#inv_payee").val();
+            inv_phone = $("#inv_phone").val();
+            inv_taxno = $("#inv_taxno").val();
+            inv_email = $("#inv_email").val();
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url:"{% url 'carts:checkout' %}",
+                data:{
+                    'personcompany':personcompany,
+                    'inv_payee':inv_payee,
+                    'inv_phone':inv_phone,
+                    'inv_taxno':inv_taxno,
+                    'inv_email':inv_email,
+                    'address':address,
+                    'payment':payment,
+
+                },
+                async: true,
+
+                beforeSend:function(xhr, settings){
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function(data) {
+                   if(data){
+                       var json = eval("("+data+")");
+                       order_number = json.order_number;// data的值是json字符串，这行把字符串转成object
+                       window.location.href = "{% url 'carts:playment' %}" + "?order_number=" + order_number
+                    }
+                },
+            });
+        }
+    });
+</script>
+</div>
+</body>
+</html>

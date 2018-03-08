@@ -1,0 +1,42 @@
+﻿div,lu,li{margin: 0px;padding: 0px;}
+body{font-family: "Microsoft YaHei" ! important; font-size:12px; background-color:#f8f8f8;text-align: center;}
+
+.ny_content{width:100%;height:auto; /* margin:0px auto; */position:relative;}
+
+.content_nr{min-width:1190px; width:1190px; height:auto;overflow:auto;zoom:1;position:relative;margin:0px auto;margin-bottom: 30px;}
+
+.download_content{width:inherit;height:350px;margin-top: 0px;margin-bottom: 25px;}
+* html .download_content{width:inherit;height:350px;background-repeat: no-repeat;background-position: 0px 0px;margin-top: 0px;margin-right: auto;margin-bottom: 25px;margin-left: auto;}
+
+.down_left{ width:162px; height:auto; float:left; margin:0px;padding-top:15px;padding-bottom:43px; display:inline;border:1px solid #E1E1E1;background:#FAFAFA;}
+.down_right{ width:995px; height:auto;min-height:600px;margin-left:25px; float:left;}
+.down_rtop1{width:inherit; height:52;overflow:hidden;padding-bottom: 15px;display: block;border-right: 1px solid #E5E5E5;border-left: 1px solid #E5E5E5;}
+.down_rcenter{background:white; width:inherit; height:auto!important;padding-bottom:60px; overflow:hidden;border-bottom:1px solid #E5E5E5;border-left:1px solid #E5E5E5;border-right:1px solid #E5E5E5;display: block;}
+.down_rcenter1{ background:#fff; width:inherit; height:auto;padding-bottom:20px; overflow:hidden;border-bottom:1px solid #E5E5E5;border-left:1px solid #E5E5E5;border-right:1px solid #E5E5E5;}
+
+.phone_list{overflow:hidden;zoom:1;padding: 0px;margin:0;list-style: none;width: 100%}
+.phone_list li{ width:250px;zoom:1 ;height:140px;float:left;margin:20px 0px 0px 50px;padding:0xp;position: relative;list-style: inherit;}
+.phone_tp{ width:inherit; height:140px;}
+.phone_tp:HOVER .phone_name{display:block;height:24px;bottom:0px; line-height:24px; text-align:center; color:#fff; background:url(../images/phone_bg.png);}
+.phone_img{ width:250px; height:140px; display:block;}
+html>body .phone_name{display:none; width:inherit; height:24px; position:absolute; bottom:0px; line-height:24px; text-align:center; color:#fff; background:url(../images/phone_bg.png);font-family:"微软雅黑"; font-size:15px; font-weight:bold;}
+*html .phone_name{ width:inherit; height:24px; position:absolute; bottom:0px; line-height:24px; text-align:center; color:white; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='images/phone_bg.png'); background-repeat:no-repeat;font-family:"微软雅黑"; font-size:15px;font-weight:bold;}
+.phone_name a{color:white;position:relative;}
+
+.down_pages{ width:100%; height:auto; margin:0px auto; overflow:hidden;padding-top:20px; text-align:right;color:#265792;}
+.pages_numl{ float:right;padding-right:20px; height:30px;}
+.pages_numl a{background:url(../images/ui_page.png) no-repeat; width:26px; height:26px; text-align:center; color:black; line-height:26px; float:left; margin-right:3px; display:inline;border: solid 1px #ddd;border-radius: 3px}
+.pages_numl .prepage{background-position:-1px -27px; width: 41px;text-align: left;padding-left: 18px;display: block;height: auto;}
+.pages_numl .prepage:HOVER{background-position:-1px -82px;}
+.pages_numl .nextpage{width: 41px;padding-right: 18px;text-align: right;background-position: -1px -55px;margin-right: 3px;}
+.pages_numl .nextpage:HOVER{background-position: -1px -110px;}
+.pages_numl a:hover{text-decoration:none;color: red;}
+
+html>body .down_center{width:100%; height:auto; margin:0px auto; overflow:hidden;}
+* html .down_center{filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='images/down_center.png');width:100%; height:auto; margin:0px auto; overflow:hidden;background-repeat:repeat-y;}
+
+.phone_table{margin:0px auto;width:100%; font-size:12px; color:#646464;/* margin-top:15px; */}
+.phone_title{height:28px;background:#FAFAFA; width:673px; line-height:28px; font-weight:bold; font-size:16px; text-align:center;border-bottom: 1px red solid;}
+
+.g_search input.btn_so{_width: 24px;}
+

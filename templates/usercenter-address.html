@@ -1,0 +1,677 @@
+﻿<!DOCTYPE html PUBLIC "">
+<html>
+{% load staticfiles %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>用户中心_金立商城</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/" type="image/x-icon">
+<script type="text/javascript" src="{% static 'shop.gionee.com.usercenter/js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.usercenter/js/jquery.msgbox.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.usercenter/js/base.201311231707.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.usercenter/css/global_v2.201411051554.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.usercenter/css/user_v2.201312241047.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.usercenter/css/jquery.msgbox.css' %}"/>
+
+
+</head>
+<body>
+<div class="g_hd" id="glbHeader" data-la="12">
+<div class="wrapper" id="Jslheaderbd">
+<a href="/" target="_self" hidefocus="true" class="g_logo fl tin">金品质立天下</a>
+<div class=" fr g_hd_main">
+<div class="g_quickMenu fr" id="JquickMenu">
+<span class="loginReg" id="JloginReg">
+{% if request.user.id %}
+<a href="{% url 'users:order_list' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">{{ request.user.nick_name }}</a>
+{% else %}
+<a href="{% url 'users:login' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">账号登录</a>
+{% endif %}
+<span class="line">|</span>
+<a href="{% url 'users:register' %}" target="_self" hidefocus="true" class="reg">注册</a><b></b>
+<span class="line">|</span>
+<a href="{% url 'users:logout' %}" target="_self" hidefocus="true" class="reg">退出</a><b></b>
+</span>
+<span class="cart" id="Jcart">
+<span class="cart_hd"><a href="{% url 'carts:add' %}" hidefocus="true">购物车<b></b></a><i class="whitespace"></i></span>
+<span class="cart_bd" id="JcartBd">
+<span class="cart_loading"></span>
+</span>
+</span>
+
+</div>
+<div class="g_search fr">
+<form action="/" method="get" target="_blank" id="search">
+<input class="txt fl" name="kw" type="text" value="" id="JsearchTxt" />
+<input type="submit" class="btn_so fr" value="" />
+</form>
+</div>
+<ul class="g_mainnav c">
+<li class="mNav_item home"><a href="/" target="_self" hidefocus="true" class="mNav_title">首页</a></li>
+<li class="mNav_item mobile" id="JmNavMobile">
+<a href="{% url 'mobiles:list' %}" target="_self" hidefocus="true" class="mNav_title">手机</a>
+</li>
+<li class="mNav_item peijian"><a href="{% url 'parts:list' %}" target="_self" hidefocus="true" class="mNav_title">配件</a><b></b></li>
+<li class="mNav_item service"><a href="{% url 'service:list' %}" target="_self" hidefocus="true" class="mNav_title">服务</a><b></b></li>
+<li class="mNav_item loaddown"><a href="{% url 'download:center' %}" target="_blank" hidefocus="true" class="mNav_title">下载</a><b></b></li>
+<li class="mNav_item elife"><a href="{% url 'service:hint' %}" target="_blank" hidefocus="true" class="mNav_title">社区</a><b></b></li>
+<li class="mNav_item elife"><a href="{% url 'service:hint' %}" rel="nofollow" target="_blank" hidefocus="true" class="mNav_title">amigoOS</a><b></b></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="sl_wrapper">
+<div class="wrapper">
+<div class="ui_crumb c">
+<ul>
+<li><a href="/" target="_self" hidefocus="true">商城</a></li>
+<li><a href="/user.php" target="_self" hidefocus="true">个人中心</a></li>
+<li>收货地址</li>
+</ul>
+</div>
+<div class="user_sl_cont user_menuCur_address ">
+<div class="user_sl_contIn c">
+<div class="user_sl_colMain">
+<div class="user_address" id="Jaddress">
+<div class="user_addr_lbl" id="Jaddresslbl">
+<span class="name">收货人姓名</span>
+<span class="mobile">电话</span>
+<span class="address">地址信息</span>
+</div>
+
+{% for user_address in user_addresses %}
+<div class="user_addr_item">                        
+<div class="item_simple">                             
+<div class="info">                                
+<span id="name_{{ user_address.id }}" class="name" value="小弟">{{ user_address.consignee }}</span>
+<span id="mobile_{{ user_address.id }}" class="mobile">{{ user_address.mobile }}</span>
+<span id="country_{{ user_address.id }}" class="country">{{ user_address.address }}</span>
+</div>                             
+<div class="op">
+    <a href="#nolink" id="edit_{{ user_address.id }}" class="edit" value="161015">编辑</a>|
+    <a href="#nolink" id="delete_{{ user_address.id }}" class="delete"  value="161015">删除</a></div>
+</div>  
+<script>
+
+</script>
+
+<div class="item_cont" style="display:none;" id="item_cont_{{ user_address.id }}">
+
+<table class="confCart_addr_table">
+<tbody>
+
+<tr>
+<td class="lblTd ">
+<span class="ui_mustIcon">*</span>收货人姓名:</td>
+<td>
+<input name="consignee" class="input" id="input_name_{{ user_address.id }}" type="text" value="">
+
+</td>
+</tr>
+
+<tr>
+<td class="lblTd ">
+<span class="ui_mustIcon">*</span>手机号码：</td>
+<td>
+<input name="mobile" id="input_mobile_{{ user_address.id }}" class="input" type="text" value="">
+
+</tr>
+
+<tr>
+<td class="lblTd">
+<span class="ui_mustIcon">*</span>详细地址：
+</td>
+<td>
+    <select id="province_{{ user_address.id }}" style="width:120px;"></select>
+    <select id="city_{{ user_address.id }}" style="width:120px; margin-left: 10px"></select>
+    <select id="town_{{ user_address.id }}" style="width:120px;margin-left: 10px"></select>
+</td>
+</tr>
+
+<tr>
+<td class="lblTd">&nbsp;</td>
+<td>
+    <input name="detail" class="input address" type="text" id="input_address_{{ user_address.id }}" value="">
+</td>
+</tr>
+
+<tr>
+    <td class="lblTd">&nbsp;</td>
+    <td>
+        <input class="conf_new" id="conf_modify_{{ user_address.id }}" type="button" value="确认收货信息" addrtag="save">
+    </td>
+    <td>
+        <input class="conf_new" id="cancel_modify_{{ user_address.id }}" type="button" value="取消修改" addrtag="save">
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<script type="text/javascript">
+var province_name = ""
+var dict_town = ""
+$(document).ready(function(){
+
+  $("#conf_modify_"+{{ user_address.id }}).click(function () {
+
+      $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:modify_address' %}",
+        data:{
+            'user_address_id':{{ user_address.id }},
+            'consignee':$("#input_name_"+{{ user_address.id }}).val(),
+            'mobile':$("#input_mobile_"+{{ user_address.id }}).val(),
+            'province':$("#province_" + {{ user_address.id }}).val(),
+            'city':$("#city_" + {{ user_address.id }}).val(),
+            'town':$("#town_" + {{ user_address.id }}).val(),
+            'address':$("#input_address_"+{{ user_address.id }}).val()
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+
+            if(data.status == 'invalid'){
+                if(data.consignee){
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.consignee,
+                        type :'text'
+                    });
+                }else if(data.mobile) {
+                     $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.mobile,
+                        type :'text'
+                     });
+                }else if(data.town){
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.town,
+                        type :'text'
+                     });
+                }else if(data.city){
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.city,
+                        type :'text'
+                     });
+                }else if(data.address) {
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.address,
+                        type :'text'
+                     });
+                }
+            }else if(data.status == 'success'){
+                $("#name_"+{{ user_address.id }}).html($("#input_name_"+{{ user_address.id }}).val());
+                $("#mobile_"+{{ user_address.id }}).html($("#input_mobile_"+{{ user_address.id }}).val());
+                $("#country_"+{{ user_address.id }}).html($("#input_address_"+{{ user_address.id }}).val());
+                $("#item_cont_"+{{ user_address.id }}).slideToggle();
+                $("#input_name_"+{{ user_address.id }}).val("");
+                $("#input_mobile_"+{{ user_address.id }}).val("");
+                $("#input_address_"+{{ user_address.id }}).val("");
+            }
+        },
+      });
+
+  });
+
+  $("#cancel_modify_"+{{ user_address.id }}).click(function(){
+      $("#input_name_"+{{ user_address.id }}).val("");
+      $("#input_mobile_"+{{ user_address.id }}).val("");
+      $("#input_address_"+{{ user_address.id }}).val("");
+      $("#item_cont_"+{{ user_address.id }}).slideToggle();
+
+  });
+
+  $("#delete_"+{{ user_address.id }}).click(function () {
+      $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:del_address' %}",
+        data:{
+            'user_address_id':{{ user_address.id }}
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+             if(data.status == 'success'){
+                window.location.href = "{% url 'users:user_address' %}"
+            }
+        },
+      });
+  });
+
+  $("#edit_"+{{ user_address.id }}).click(function(){
+
+      $("#item_cont_"+{{ user_address.id }}).slideToggle();
+
+      $.getJSON("{% static 'shop.gionee.com.usercenter/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              var result = "<option value='" + n + "'>" + n + "</option>";
+              $("#province_"+{{ user_address.id }}).append(result);
+          });
+
+      });
+
+  });
+
+  $("#province_"+{{ user_address.id }}).click(function() {
+      $("#city_"+{{ user_address.id }}).empty();
+      province_name = $("#province_"+{{ user_address.id }}).val();
+
+      $.getJSON("{% static 'shop.gionee.com.usercenter/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var result = "<option value='" + key + "'>" + key + "</option>";
+                      $("#city_"+{{ user_address.id }}).append(result);
+                  }
+              }
+          });
+      });
+  });
+
+  $("#city_"+{{ user_address.id }}).click(function() {
+      $("#town_"+{{ user_address.id }}).empty();
+      var city_name = $("#city_"+{{ user_address.id }}).val();
+      $.getJSON("{% static 'shop.gionee.com.usercenter/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var dict_city_town = value
+                      for(var city in dict_city_town) {
+                          if(city == city_name){
+                              dict_town = dict_city_town[city_name]
+                          }
+                      }
+                  }
+              }
+          });
+          for(var i=0;i<dict_town.length;i++){
+              var result = "<option value='" + dict_town[i] + "'>" + dict_town[i] + "</option>";
+              $("#town_"+{{ user_address.id }}).append(result);
+          }
+      });
+  });
+});
+</script>
+</div> 
+{% endfor %}
+
+
+<div id="JnewAddr" class="user_addr_new">
+<div class="btn_new_con">
+<a href="#nolink" id="btn_new" class="btn_new" tag="new">新增收货地址</a>
+</div>
+<div id="cont_new" class="cont_new" style="display: none;">
+<table class="confCart_addr_table">
+<tbody>
+<tr>
+<td class="lblTd ">
+<span class="ui_mustIcon">*</span>收货人姓名:</td>
+<td>
+<input id="consignee" name="consignee" class="input" type="text" value="" addrtag="consignee" >
+</td>
+</tr>
+
+<tr>
+<td class="lblTd ">
+<span class="ui_mustIcon">*</span>手机号码：</td>
+<td>
+<input id="mobile" name="mobile" class="input" type="text" value="" addrtag="mobile">
+</td>
+</tr>
+
+<tr>
+<td class="lblTd">
+<span class="ui_mustIcon">*</span>详细地址：
+</td>
+<td>
+    <select id="province" style="width:120px;"></select>
+    <select id="city" style="width:120px; margin-left: 10px"></select>
+    <select id="town" style="width:120px;margin-left: 10px"></select>
+</td>
+</tr>
+
+<tr>
+<td class="lblTd">&nbsp;</td>
+<td>
+    <input id="address" name="detail" class="input address" type="text"  value="">
+</td>
+</tr>
+
+<tr>
+<td class="lblTd">&nbsp;</td>
+    <td>
+        <input class="conf_new" id="save" name="conf_new" type="button" value="保存收货信息" addrtag="save">
+    </td>
+    <td>
+        <input class="conf_new" id="cancel" name="save" type="button" value="取消保存" addrtag="save">
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<script type="text/javascript">
+var province_name = ""
+var dict_town = ""
+$(document).ready(function(){
+
+    $("#cancel").click(function(){
+        $("#cont_new").slideToggle();
+        $("#consignee").val("");
+        $("#mobile").val("");
+        $("#address").val("");
+    });
+
+
+    $("#save").click(function () {
+        $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:new_address' %}",
+        data:{
+            'consignee':$("#consignee").val(),
+            'mobile':$("#mobile").val(),
+            'province':$("#province").val(),
+            'city':$("#city").val(),
+            'town':$("#town").val(),
+            'address':$("#address").val()
+        },
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+
+            if(data.status == 'invalid'){
+                if(data.consignee){
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.consignee,
+                        type :'text'
+                    });
+                }else if(data.mobile) {
+                     $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.mobile,
+                        type :'text'
+                     });
+                }else if(data.town){
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.town,
+                        type :'text'
+                     });
+                }else if(data.city){
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.city,
+                        type :'text'
+                     });
+                }else if(data.address) {
+                    $.msgbox({
+                        closeImg: '{% static 'shop.gionee.com.usercenter/images/close.png' %}',
+                        height:250,
+                        width:300,
+                        content:data.address,
+                        type :'text'
+                     });
+                }
+            }else if(data.status == 'success'){
+
+                $("#cont_new").slideToggle();
+                $("#consignee").val("");
+                $("#mobile").val("");
+                $("#address").val("");
+                window.location.href = "{% url 'users:user_address' %}"
+            }
+        },
+      });
+
+    });
+
+  $("#btn_new").click(function(){
+      $("#cont_new").slideToggle();
+
+      $.getJSON("{% static 'shop.gionee.com.usercenter/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              var result = "<option value='" + n + "'>" + n + "</option>";
+              $("#province").append(result);
+          });
+
+      });
+
+  });
+
+  $("#province").click(function() {
+      $("#city").empty();
+      province_name = $("#province").val();
+
+      $.getJSON("{% static 'shop.gionee.com.usercenter/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var result = "<option value='" + key + "'>" + key + "</option>";
+                      $("#city").append(result);
+                  }
+              }
+          });
+      });
+  });
+
+  $("#city").click(function() {
+      $("#town").empty();
+      var city_name = $("#city").val();
+      $.getJSON("{% static 'shop.gionee.com.usercenter/js/text.json' %}", function (data) {
+          $.each(data, function (n, value) {
+              if(n == province_name){
+                  for (var key in value){
+                      var dict_city_town = value
+                      for(var city in dict_city_town) {
+                          if(city == city_name){
+                              dict_town = dict_city_town[city_name]
+                          }
+                      }
+                  }
+              }
+          });
+          for(var i=0;i<dict_town.length;i++){
+              var result = "<option value='" + dict_town[i] + "'>" + dict_town[i] + "</option>";
+              $("#town").append(result);
+          }
+      });
+  });
+
+
+});
+</script>
+
+</div>
+</div>
+
+<div class="user_sl_colSub">
+<div class="user_menu">
+<div class="user_menu_hd">
+个人中心
+</div>
+<div class="user_menu_bd">
+<dl class="user_menu_item">
+<dt>我的交易</dt>
+<dd>
+<ul>
+<li><a href="{% url 'users:order_list' %}" target="_self" hidefocus="true" class="myorder">我的订单</a></li>
+<li><a href="{% url 'users:cash' %}" target="_self" hidefocus="true" class="bonus">我的现金券</a></li>
+<li><a href="{% url 'users:recycle' %}" target="_self" hidefocus="true" class="recycle">我的回收</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="user_menu_item">
+<dt>我的信息</dt>
+<dd>
+<ul>
+<li><a href="{% url 'users:user_address' %}" target="_self" hidefocus="true" class="address">收货地址</a></li>
+<li><a href="{% url 'users:info' %}" target="_self" hidefocus="true" class="personal">个人资料</a></li>
+<li><a href="{% url 'users:forget' %}" target="_self" hidefocus="true" class="psd">修改密码</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="g_ft" style="background:#fff">
+<div class="g_ts">
+<ul class="wrapper">
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_dropgos"></i><em>7天<br>退货保障</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_change"></i><em>30天<br>换货承诺</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_freesheep"></i><em>99元起<br>全场免运费</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_svspoint"></i><em>579家<br>售后服务点</em></a></li>
+</ul>
+</div>
+<div class="g_ft_guide wrapper c">
+<dl>
+<dt>关于金立</dt>
+<dd><a href="#" hidefocus="true" target="_blank">企业荣誉</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">金立体验店</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">代理商专区</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">加入金立</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">联系我们</a></dd>
+</dl>
+<dl>
+<dt>新闻资讯</dt>
+<dd><a href="#" hidefocus="true" target="_blank">公司新闻</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">媒体报道</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">金立月刊</a></dd>
+</dl>
+<dl>
+<dt>购物指南</dt>
+<dd><a href="#" hidefocus="true" target="_blank">购物流程</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">支付方式</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">配送说明及费用</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">订单管理</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">购买常见问题</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">预置应用公示</a></dd>
+</dl>
+<dl>
+<dt>售后服务</dt>
+<dd><a href="#" hidefocus="true" target="_blank">售后政策</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">售后服务网点</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">上门维修</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">签收须知</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">物流查询</a></dd>
+</dl>
+<dl>
+<dt>关注我们</dt>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="sina">新浪微博<b></b></a></dd>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="tencent">腾讯微博<b></b></a></dd>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="qzone">QQ空间<b></b></a></dd>
+</dl>
+<div class="g_gn_wx fr">
+<i class="ico_gn_weixin"></i>
+<span>扫一扫关注微信</span>
+</div>
+</div>
+<div class="g_ft_coprt">
+<div class="wrapper">
+<ul class="g_ft_coplink c">
+<li class="link_item link_first">
+<a href="#" target="_blank" hidefocus="true">网站地图</a>
+</li>
+<li class="link_item link_company" id="Jconpany"><b></b>
+<div class="ui_borderCir" style="z-index:2">
+<div class="ui_borderCir_t">
+<div class="ui_borderCir_tl"></div>
+<div class="ui_borderCir_tm"></div>
+<div class="ui_borderCir_tr"></div>
+</div>
+<div class="ui_borderCir_c">
+<p>集团下属公司<span></span></p>
+<ul style="display:none">
+<li><a href="#" rel="nofollow" target="_blank">欧新通信</a></li>
+<li><a href="#" rel="nofollow" target="_blank">奥软网络</a></li>
+</ul>
+</div>
+<div class="ui_borderCir_b">
+<div class="ui_borderCir_bl"></div>
+<div class="ui_borderCir_bm"></div>
+<div class="ui_borderCir_br"></div>
+</div>
+</div>
+</li>
+</ul>
+<div class="c">
+<div class="lang" id="Jlang" style="z-index:3">
+<div class="ui_borderCir">
+<div class="ui_borderCir_t">
+<div class="ui_borderCir_tl"></div>
+<div class="ui_borderCir_tm"></div>
+<div class="ui_borderCir_tr"></div>
+</div>
+<div class="ui_borderCir_c">
+<ul>
+<li><a href="#" target="_blank">Global/English</a></li>
+<li><a href="#" target="_self">中国/简体中文</a></li>
+</ul>
+</div>
+<div class="ui_borderCir_b">
+<div class="ui_borderCir_bl"></div>
+<div class="ui_borderCir_bm"></div>
+<div class="ui_borderCir_br"></div>
+</div>
+</div>
+<span class="icon"></span>
+</div>
+<p class="copyright" style="position: relative; z-index:1; line-height: 45px;">增值电信业务经营许可证：<a href="#" target="_blank">粤B2-20120350</a>
+<a href="#" target="_blank">粤ICP备05087105号</a>
+<a href="#" target="_blank">粤网文[2015]2233-484号</a>
+<a href="E" target="_blank">粤文市审[2012]196号</a>
+<span style="white-space: nowrap;">
+<a id='___szfw_logo___' href="#" target='_blank' rel="nofollow"><img src='{% static 'shop.gionee.com.mobile_list/picture/sf.png' %}' border='0' style="opacity: 0.8;" /></a>
+
+<script id="ebsgovicon" src="{% static 'shop.gionee.com.mobile_list/js/govicons.js' %}" type="text/javascript" charset="utf-8"></script>
+<a href="#" rel="nofollow" target="_blank"><img src="{% static 'shop.gionee.com.mobile_list/picture/b.png' %}" width="120" height="45" style="vertical-align: middle;" /> </a>
+</span>
+</p>
+<p class="copyright" style="line-height: 23px;">Copyright &copy; 2013 深圳市金立通信设备有限公司 版权所有 .</p>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

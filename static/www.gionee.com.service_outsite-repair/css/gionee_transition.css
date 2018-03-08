@@ -1,0 +1,16 @@
+﻿.wrapper{width:1190px;margin:0 auto}
+.sl_wrapper{padding-bottom:30px;background:#f1f1f1}
+
+.trans_banner img{width:100%;display:block}
+.banner_mid{padding-bottom:60px;width:100%;text-align:center;background:#000;overflow:hidden;font-family:"微软雅黑"}
+.banner_mid p{line-height:30px;font-size:16px;color:#fff}
+.banner_mid span{padding-top:25px;font-size:16px;color:#777;display:block}
+.banner_mid ul{padding-top:15px;width:100%;text-align:center}
+.banner_mid ul a{margin:15px;width:158px;height:48px;line-height:48px;text-align:center;font-size:20px;color:#fff;border:#fff solid 1px;display:block;border-radius:3px;display:inline-block}
+.banner_mid ul a:hover{color:#e96b10;background:#fff}
+
+.qwbox{padding-bottom:40px;width:100%;background:#fff;font-family:"微软雅黑"}
+.qwbox h3{padding:40px 0 32px;width:100%;text-align:center;font-size:32px;color:#333;font-weight:normal}
+.qwbox dl{padding:20px 40px 0;width:1110px;line-height:26px;display:block}
+.qwbox dt{font-size:18px;color:#333}
+.qwbox dd{font-size:14px;color:#777}

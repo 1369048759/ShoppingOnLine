@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+  <!-- /base(href="/members/reset/") -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/login.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/common.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/resetroute.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/jquery.msgbox.css' %}"/>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.min.js' %}"></script>
+</head>
+<body ng-controller="main">
+  <div id="outer">
+    <div id="middle">
+      <footer class="pa w">
+        <address class="tc" ng-bind="i18n.Gionee"></address>
+      </footer>
+      <div id="inner" class="holder bc pr">
+        <div class="top frag pa l0"></div>
+        <div class="bottom frag pa l"></div>
+        <header class="tc">
+          <h1 class="ib vm mt10">
+            <span class="none">amigo找回密码</span>
+          </h1>
+          <p class="errorCode_title pa transition">找回账号密码</p>
+
+          <ul class="pt20 tc w transition" ng-class="{ib:infor.register}">
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit1}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow1}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit2}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow2}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit3}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow3}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit4}"></li>
+          </ul>
+            <p class="errorCode_forget pa transition" id="jsCompanyTips">
+
+              </p>
+        </header>
+        <section class="pr pageFrame" >
+          <div class="form-reset">
+            <div class="tab-form">
+                <div id="email_register_form">
+                    <div class="auto-reset">
+                    </div>
+                    <div class="form-group marb20 ">
+                        <label>邮&nbsp;箱</label>
+                        <input type="text" id="email" name="email" placeholder="请输入您的邮箱地址" value="">
+                    </div>
+
+                    <div class="form-group marb8 captcha1 blur">
+                        <label>验证码</label>
+                        {{ register_form.captcha }}
+                    </div>
+                    <div class="error btns" id="jsEmailTips">
+                    </div>
+                    <div class="auto-box">
+                    </div>
+                    <input class="btn btn-green" id="forgetBtn" type="submit" value="下一步">
+                </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+function forget(current_elem, email, id_captcha_0, id_captcha_1){
+
+
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:forget' %}",
+        data:{'email':email, 'captcha_0':id_captcha_0, 'captcha_1':id_captcha_1},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+
+            if(data.status == 'success'){
+                $.msgbox({
+
+                    closeImg: '{% static 'id.amigo.cn/images/close.png' %}',
+                    height:250,
+                    width:300,
+                    content:'请登入邮箱，点击链接修改密码',
+                    type :'text'
+                });
+                setTimeout(function(){window.location.href = window.location.href;},3000);
+            }else if(data.status == 'fail'){
+                $.msgbox({
+
+                    closeImg: '{% static 'id.amigo.cn/images/close.png' %}',
+                    height:250,
+                    width:300,
+                    content:'修改密码链接无法发送到该邮箱，请重新发送',
+                    type :'text'
+                });
+                setTimeout(function(){window.location.href = window.location.href;},3000);
+            }else if(data.captcha){
+                $('#jsCompanyTips').html(data.captcha)
+            }else if(data.user){
+                $('#jsCompanyTips').html(data.user)
+            }else if(data.email){
+                $('#jsCompanyTips').html(data.email)
+            }
+        },
+    });
+}
+
+$('#forgetBtn').on('click', function(){
+    forget(
+        $(this), $('#email').val(),
+        $('#id_captcha_0').val(),
+        $('#id_captcha_1').val()
+    );
+});
+
+</script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.dragndrop.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.msgbox.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/common.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/resetroute.js' %}" defer="defer"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/unslider.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/login.js' %}"></script>
+</body>
+</html>

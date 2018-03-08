@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+  <!-- /base(href="/members/reset/") -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/login.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/common.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/resetroute.css' %}"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'id.amigo.cn/css/jquery.msgbox.css' %}"/>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.min.js' %}"></script>
+</head>
+<body ng-controller="main">
+  <div id="outer">
+    <div id="middle">
+      <footer class="pa w">
+        <address class="tc" ng-bind="i18n.Gionee"></address>
+      </footer>
+      <div id="inner" class="holder bc pr">
+        <div class="top frag pa l0"></div>
+        <div class="bottom frag pa l"></div>
+        <header class="tc">
+          <h1 class="ib vm mt10">
+            <span class="none">amigo找回密码</span>
+          </h1>
+          <p class="errorCode_title pa transition">找回账号密码</p>
+
+
+          <ul class="pt20 tc w transition" ng-class="{ib:infor.register}">
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit1}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow1}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit2}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow2}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit3}"></li>
+            <li class="vm ib line transition" ng-class="{selected:infor.pageArrow3}"></li>
+            <li class="vm ib point transition" ng-class="{selected:infor.pageTit4}"></li>
+          </ul>
+            <p class="errorCode_forget pa transition" id="jsCompanyTips">
+
+              </p>
+        </header>
+        <section class="pr pageFrame" >
+          <div class="form-reset">
+            <div class="tab-form">
+                <div id="email_register_form">
+                    <div class="auto-reset">
+                    </div>
+                    <div class="form-group marb20 ">
+                        <label>新密码</label>
+                        <input type="text" id="password1" name="password1" placeholder="请输入您的新密码" value="">
+                    </div>
+
+                    <div class="form-group marb20 ">
+                        <label>确认密码</label>
+                        <input type="text" id="password2" name="password2" placeholder="请输入您的确认密码" value="">
+                    </div>
+                    <div class="error btns" id="jsEmailTips">
+                    </div>
+                    <div class="auto-box">
+                    </div>
+                    <input class="btn btn-green" id="modifyBtn" type="submit" value="下一步">
+                </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+function modify(current_elem, password1, password2){
+
+
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url:"{% url 'users:modify' modify_code %}",
+        data:{'password1':password1, 'password2':password2},
+        async: true,
+        beforeSend:function(xhr, settings){
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if(data.status == 'success'){
+                $.msgbox({
+
+                    closeImg: '{% static 'id.amigo.cn/images/close.png' %}',
+                    height:250,
+                    width:300,
+                    content:'密码修改成功，请重新登入',
+                    type :'text'
+                });
+                setTimeout(function(){window.location.href = "{% url 'users:login' %}";},3000);
+            }else if(data.status == 'fail'){
+                 $('#jsCompanyTips').html(data.msg)
+            }else if(data.password1){
+                $('#jsCompanyTips').html(data.password1)
+            }else if(data.password2) {
+                $('#jsCompanyTips').html(data.password2)
+            }
+        },
+    });
+}
+
+$('#modifyBtn').on('click', function(){
+    modify(
+        $(this),
+        $('#password1').val(),
+        $('#password2').val()
+    );
+});
+
+</script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.dragndrop.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/jquery.msgbox.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/common.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/resetroute.js' %}" defer="defer"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/unslider.js' %}"></script>
+  <script type="text/javascript" src="{% static 'id.amigo.cn/js/login.js' %}"></script>
+</body>
+</html>

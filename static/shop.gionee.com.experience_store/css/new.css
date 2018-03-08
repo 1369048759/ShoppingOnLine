@@ -1,0 +1,100 @@
+.w750{height:104px;}
+body{background-color:#f1f1f1;}
+.g_mainnav li{
+	float:left;
+	height:30px;
+	overflow:hidden;
+	margin:0px;padding:0px;}
+.service{
+	width:1090px;
+	height:837px;
+	background-color:#fff;
+	overflow:hidden;
+	margin:auto;
+	margin-top:45px;
+	margin-bottom:60px;
+	color:#333;
+	font-family:"Î¢ÈíÑÅºÚ";
+	font-size:12px;
+	padding:30px 50px;}
+.service_title{
+	position:relative;
+	height:58px;
+	line-height:58px;
+	font-size:22px;
+	font-weight:normal;
+	border-bottom:solid 2px #eaeaea;}
+.serviceNet{padding:23px 0;font-size:14px;}
+.serviceNet .input{
+	color:#999;height:26px;
+	line-height:26px;
+	border:1px solid #eaeaea;
+	padding-left:2px;
+	margin-right:7px;
+	width:150px;vertical-align:middle;}
+.service .leftside{
+	position:relative;
+	float:left;width:440px;
+	height:556px;overflow:hidden;}
+.service .serviceNet_ul{height:533px;overflow:hidden;}
+.service .serviceNet_li{
+	float:left;display:inline;
+	width:440px;
+	border-bottom:1px solid #eaeaea;
+	padding:8px 0;
+	line-height:26px;
+	height:90px;cursor:pointer;
+	padding-top:30px;}
+.serviceNet_li_focus{background-color:#eaeaea;}
+.service .serviceNet_li a{display:block;width:383px;color:#333;}
+.service .serviceNet_li p{padding-left:16px;font-size:14px;}
+.service .serviceNet_li p.company{font-size:16px;}
+.service .serviceNet_page{
+	width:381px;height:23px;
+	text-align:center;
+	padding-top:50px;
+	margin:auto;vertical-align:middle;clear:both;}
+.ui_page a{
+	display:inline-block;
+	height:26px;
+	line-height:26px;
+	min-width:16px;
+	padding:0 5px;
+	overflow:hidden;
+	text-align:center;
+	border:solid 1px #ddd;
+	border-radius:3px;
+	font-size:12px;
+	margin-right:3px;
+	vertical-align:middle;
+	white-space:nowrap;
+	_width:16px;
+	_overflow-x:visible;
+	color:#333;cursor:pointer;}
+.ui_page a:hover{color:#e22801;}
+.ui_page a.ui_page_curr{color:#e22801;}
+.service .rightpic{
+	height:556px;
+	overflow:hidden;
+	width:635px;
+	position:relative;
+	margin-left:450px;}
+.rightpic .imgbox{width:635px;list-style:none;}
+.imglh{width:635px;height:558px;overflow:hidden;display:none;}
+.imglh img{height:558px;}
+.onshow{display:block;}
+.imgnav{position:absolute;bottom:10px;right:10px;}
+.imgnav li{
+	float:left;
+	width:20px;
+	height:20px;
+	cursor:pointer;
+	color:#e22801;
+	line-height:20px;
+	text-align:center;
+	background:#fff;
+	margin-right:4px;
+	list-style:none;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;border-radius:10px;}
+.imgnav li.curr{background-color:#e22801;color:#fff;}

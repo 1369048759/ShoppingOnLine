@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>购物流程_金立商城</title>
+<meta http-equiv="pragma" content="no-cach" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/" type="image/x-icon" />
+<script async src="{% static 'shop.gionee.com.carts/js/ba0151a7abba48c285d90dc6697be5ad.js' %}"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.carts/css/global.201310171118.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.carts/css/global_v2.201411051554.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop.gionee.com.carts/css/cart_v2.css' %}"/>
+<script type="text/javascript" src="{% static 'shop.gionee.com.carts/js/jquery-1.7.min.201303280959.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.carts/js/base.201311231707.js' %}"></script>
+<script type="text/javascript" src="{% static 'shop.gionee.com.carts/js/md5.js' %}"></script>
+<style>.tuij_tips{display:block;background:#ef4222;color:#fff;height:20px;position:absolute;width:78px;top:-18px;left:27px;font-size:12px;text-align:center;line-height:22px;}.zsyh{position:relative;}.orderSuc_payBox .item,.orderSuc_payBox ul{overflow:visible;}.orderSuc_payBox .item_curr .tuij_tips{top:-22px}</style>
+</head>
+<body>
+<div class="g_hd" id="glbHeader">
+<div class="wrapper" id="Jslheaderbd">
+<a href="/" target="_self" hidefocus="true" class="g_logo fl tin">金品质立天下</a>
+<div class="w750 fr">
+<div class="g_quickMenu fr" id="JquickMenu">
+<span class="loginReg" id="JloginReg">
+{% if request.user.id %}
+<a href="{% url 'users:order_list' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">{{ request.user.nick_name }}</a>
+{% else %}
+<a href="{% url 'users:login' %}" target="_self" hidefocus="true" class="login" style="color: #ef4222;">账号登录</a>
+{% endif %}
+<span class="line">|</span>
+<a href="{% url 'users:register' %}" target="_self" hidefocus="true" class="reg">注册</a><b></b>
+<span class="line">|</span>
+<a href="{% url 'users:logout' %}" target="_self" hidefocus="true" class="reg">退出</a><b></b>
+</span>
+<span class="cart" id="Jcart">
+<span class="cart_hd"><a href="{% url 'carts:add' %}" hidefocus="true">购物车<b></b></a><i class="whitespace"></i></span>
+<span class="cart_bd" id="JcartBd">
+<span class="cart_loading"></span>
+</span>
+</span></span>
+</div>
+<div class="g_search fr">
+<form action="/" method="get" target="_blank" id="search">
+<input class="txt fl" name="kw" type="text" value="" id="JsearchTxt" />
+<input type="submit" class="btn_so fr" value="" />
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="sl_wrapper">
+<div class="sl_area">
+<div class="cart_process">
+<h1 class="title">购物车<i class="icart"></i></h1>
+<div class="cart_steps cart_steps1">
+<ul>
+<li class="step1">查看购物车</li>
+<li class="step2">确认订单信息</li>
+<li class="step3">确认/支付订单</li>
+</ul>
+<div class="icon"></div>
+</div>
+</div>
+<div id="JcontentList">
+<table border="0" cellpadding="0" cellspacing="0" class="mycart_table">
+<tr>
+<th>商品</th>
+<th>&nbsp;</th>
+<th>单价</th>
+<th>购买数量</th>
+<th>小计</th>
+<th>操作</th>
+</tr>
+<tr>
+{% for name, product in products.items %}
+<td class="img">
+<div class="ui_pimg">
+<a href="{% if product.category == 1 %}{% url 'mobiles:info' product.product_id %}{% else %}{% url 'parts:info' product.product_id %}{% endif %}" target="_blank" hidefocus="true">
+<img src="{{ MEDIA_URL }}{{ product.image }}"
+     init_src="{{ MEDIA_URL }}{{ product.image }}" width="100" height="100" alt="" />
+</a>
+</div>
+</td>
+<td class="name">
+<a href="{% if product.category == 1 %}{% url 'mobiles:info' product.product_id %}{% else %}{% url 'parts:info' product.product_id %}{% endif %}" class="ui_pname" title="{{ name }}">
+{{ product.name }}
+</a>
+</td>
+<td><span class="ui_price"><em>&yen;</em><span>{{ product.price }}.00</span></span>
+</td>
+<td>
+<div class="ui_quantity">
+
+<form id="redus_{{ name }}" action="{% url 'carts:modify' %}" method="post">
+<input type="hidden" value="{{ name }}" name="product_name"/>
+<input type="hidden" value="redu" name="style"/>
+{% csrf_token %}
+</form>
+
+<form id="add_{{ name }}" action="{% url 'carts:modify' %}" method="post">
+<input type="hidden" value="{{ name }}" name="product_name">
+<input type="hidden" value="add" name="style">
+{% csrf_token %}
+</form>
+
+<form id="" action="" method="post">
+<input type="hidden" value="{{ name }}" name="product_name">
+<input type="hidden" value="{{ del }}" name="style">
+{% csrf_token %}
+</form>
+
+<div class="ui_quantity_redu" onclick="redu(this);" id="{{ name }}"></div>
+
+<input type="text" class="ui_quantity_num" value="{{ product.quantity }}"/>
+<div class="ui_quantity_add" onclick="add(this);" id="{{ name }}"></div>
+{% csrf_token %}
+</form>
+</div>
+</td>
+<td><span class="ui_price fn_hl"><em>&yen;</em><span subtotal="true" price="69.00">{{ product.total_price }}.00</span></span>
+</td>
+<td class="op"><a href="{% url 'carts:del' name %}" class="del">删除</a></td>
+</tr>
+{% endfor %}
+</table>
+<div class="mycart_total">
+<div class="freesheeptips"><span class="expresstag">运费<span class="lozs">◆</span></span>订单实际支付金额 <a href="#" target="_blank"><em>满99元包邮</em></a></div>
+<p class="price">总价:<span class="ui_price"><em>&yen;</em><span id="JtotalPrice">{{ price }}</span></span>
+</p>
+    <script type="text/javascript" src="{% static 'shop.gionee.com.carts/js/new.js' %}"></script>
+<script type="text/javascript">
+
+function redu(obj){
+    document.getElementById("redus_"+obj.id).submit();
+}
+
+function add(obj){
+    document.getElementById("add_"+obj.id).submit();
+}
+
+</script>
+<div class="op">
+<a href="{% url 'carts:checkout' %}" hidefocus="true" target="_self" class="toCart" id="JtoPay">去结算</a>
+<a href="{% url 'mobiles:list' %}" hidefocus="true" target="_self" class="continue">&lt;&lt;继续购物</a>
+</div>
+</div>
+</div>
+<div class="user_recent_review" id="Jhistory">
+
+<div class="hd">
+<h4>最近浏览</h4>
+</div>
+<ul class="recentgoods">
+{% for recent_product, product_type in recent_products.items %}
+<li>
+<a href="{% if product_type == 1 %}{% url 'mobiles:info' recent_product.id %}{% else %}{% url 'parts:info' recent_product.id %}{% endif %}">
+<img src="{{ MEDIA_URL }}{{ recent_product.image }}" width="300" height="300"></a>
+<p class="rvgoodsname">
+<a href="{% if product_type == 1 %}{% url 'mobiles:info' recent_product.id %}{% else %}{% url 'parts:info' recent_product.id %}{% endif %}">{{ recent_product.name }}</a></p>
+<p class="prce"><em>¥</em>{{ recent_product.price }}</p>
+</li>
+{% endfor %}
+</ul>
+
+</div>
+
+</div>
+</div>
+<div class="g_ft" style="background:#fff">
+<div class="g_ts">
+<ul class="wrapper">
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_dropgos"></i><em>7天<br>退货保障</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_change"></i><em>30天<br>换货承诺</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_freesheep"></i><em>99元起<br>全场免运费</em></a></li>
+<li><a href="#" hidefocus="true" target="_blank"><i class="c_svspoint"></i><em>579家<br>售后服务点</em></a></li>
+</ul>
+</div>
+<div class="g_ft_guide wrapper c">
+<dl>
+<dt>关于金立</dt>
+<dd><a href="#" hidefocus="true" target="_blank">企业荣誉</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">金立体验店</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">代理商专区</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">加入金立</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">联系我们</a></dd>
+</dl>
+<dl>
+<dt>新闻资讯</dt>
+<dd><a href="#" hidefocus="true" target="_blank">公司新闻</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">媒体报道</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">金立月刊</a></dd>
+</dl>
+<dl>
+<dt>购物指南</dt>
+<dd><a href="#" hidefocus="true" target="_blank">购物流程</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">支付方式</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">配送说明及费用</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">订单管理</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">购买常见问题</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">预置应用公示</a></dd>
+</dl>
+<dl>
+<dt>售后服务</dt>
+<dd><a href="#" hidefocus="true" target="_blank">售后政策</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">售后服务网点</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">上门维修</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">签收须知</a></dd>
+<dd><a href="#" hidefocus="true" target="_blank">物流查询</a></dd>
+</dl>
+<dl>
+<dt>关注我们</dt>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="sina">新浪微博<b></b></a></dd>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="tencent">腾讯微博<b></b></a></dd>
+<dd><a href="#" rel="nofollow" hidefocus="true" target="_blank" class="qzone">QQ空间<b></b></a></dd>
+</dl>
+<div class="g_gn_wx fr">
+<i class="ico_gn_weixin"></i>
+<span>扫一扫关注微信</span>
+</div>
+</div>
+<div class="g_ft_coprt">
+<div class="wrapper">
+<ul class="g_ft_coplink c">
+<li class="link_item link_first">
+<a href="#" target="_blank" hidefocus="true">网站地图</a>
+</li>
+<li class="link_item link_company" id="Jconpany"><b></b>
+<div class="ui_borderCir" style="z-index:2">
+<div class="ui_borderCir_t">
+<div class="ui_borderCir_tl"></div>
+<div class="ui_borderCir_tm"></div>
+<div class="ui_borderCir_tr"></div>
+</div>
+<div class="ui_borderCir_c">
+<p>集团下属公司<span></span></p>
+<ul style="display:none">
+<li><a href="#" rel="nofollow" target="_blank">欧新通信</a></li>
+<li><a href="#" rel="nofollow" target="_blank">奥软网络</a></li>
+</ul>
+</div>
+<div class="ui_borderCir_b">
+<div class="ui_borderCir_bl"></div>
+<div class="ui_borderCir_bm"></div>
+<div class="ui_borderCir_br"></div>
+</div>
+</div>
+</li>
+</ul>
+<div class="c">
+<div class="lang" id="Jlang" style="z-index:3">
+<div class="ui_borderCir">
+<div class="ui_borderCir_t">
+<div class="ui_borderCir_tl"></div>
+<div class="ui_borderCir_tm"></div>
+<div class="ui_borderCir_tr"></div>
+</div>
+<div class="ui_borderCir_c">
+<ul>
+<li><a href="#" target="_blank">Global/English</a></li>
+<li><a href="#" target="_self">中国/简体中文</a></li>
+</ul>
+</div>
+<div class="ui_borderCir_b">
+<div class="ui_borderCir_bl"></div>
+<div class="ui_borderCir_bm"></div>
+<div class="ui_borderCir_br"></div>
+</div>
+</div>
+<span class="icon"></span>
+</div>
+<p class="copyright" style="position: relative; z-index:1; line-height: 45px;">增值电信业务经营许可证：<a href="#" target="_blank">粤B2-20120350</a>
+<a href="#" target="_blank">粤ICP备05087105号</a>
+<a href="#" target="_blank">粤网文[2015]2233-484号</a>
+<a href="E" target="_blank">粤文市审[2012]196号</a>
+<span style="white-space: nowrap;">
+<a id='___szfw_logo___' href="#" target='_blank' rel="nofollow"><img src='{% static 'shop.gionee.com.mobile_list/picture/sf.png' %}' border='0' style="opacity: 0.8;" /></a>
+
+<script id="ebsgovicon" src="{% static 'shop.gionee.com.mobile_list/js/govicons.js' %}" type="text/javascript" charset="utf-8"></script>
+<a href="#" rel="nofollow" target="_blank"><img src="{% static 'shop.gionee.com.mobile_list/picture/b.png' %}" width="120" height="45" style="vertical-align: middle;" /> </a>
+</span>
+</p>
+<p class="copyright" style="line-height: 23px;">Copyright &copy; 2013 深圳市金立通信设备有限公司 版权所有 .</p>
+</div>
+</div>
+</div>
+</div>
+
+<script src="{% static 'shop.gionee.com.carts/js/stat.js' %}" language="JavaScript"></script>
+<noscript><img src="{% static 'shop.gionee.com.carts/picture/conv.gif' %}" width="0px" style="display:none !important;"/></noscript>
+
+</div>
+</body>
+</html>
